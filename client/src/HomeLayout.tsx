@@ -1,4 +1,4 @@
-import HomeHeader from "./components/HomeHeader";
+import HomeHeader from "./components/headers/HomeHeader";
 import AppPage from "./pages/AppPage";
 
 function HomeLayout() {

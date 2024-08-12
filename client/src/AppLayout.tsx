@@ -1,4 +1,4 @@
-import AppHeader from "./components/AppHeader";
+import AppHeader from "./components/headers/AppHeader";
 import AppPage from "./pages/AppPage";
 
 function AppLayout() {
