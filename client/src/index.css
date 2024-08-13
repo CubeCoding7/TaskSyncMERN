@@ -1,68 +1,61 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --text-color: #2d2d2d;
+  --main-color: #d9d9d9;
+  --alt-color: #a4a4a4;
+  --gray-alt-color: gray;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --icon-color: #2d2d2d;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --opacity-white: rgba(255, 255, 255, 0.4);
+  --opacity-black: rgba(0, 0, 0, 0.4);
+  --opacity-text: rgba(45, 45, 45, 0.4);
+  --opacity-main: rgba(217, 217, 217, 0.4);
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --first-color: 0, 4, 255;
+  --second-color: 0, 199, 123;
+  --first-color-opacity: rgba(var(--first-color), 0.6);
+  --second-color-opacity: rgba(var(--second-color), 0.6);
+
+  --background-gradient: linear-gradient(
+    rgb(var(--first-color)),
+    rgb(var(--second-color))
+  );
+  --background-gradient-deg: linear-gradient(
+    300deg,
+    rgb(var(--first-color)),
+    rgb(var(--second-color)) 65%
+  );
+  --background-gradient-faded: linear-gradient(
+    to bottom,
+    var(--first-color-opacity),
+    var(--second-color-opacity)
+  );
+
+  color: #0004ff;
+
+  color: var(--text-color);
 }
 
 body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
+  /* background-image: var(--background-gradient-faded); */
+  background-attachment: fixed;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1,
+h2,
+p {
+  margin: 0;
+  padding: 0;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.content {
+  height: 100vh;
+  margin: 49px 0 0 0;
+  margin-left: 85px;
+  left: 85px;
+  background-size: 100% 100%;
 }

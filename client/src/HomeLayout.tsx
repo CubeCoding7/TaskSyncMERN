@@ -1,12 +1,12 @@
+import { Outlet } from "react-router-dom";
 import HomeHeader from "./components/headers/HomeHeader";
-import AppPage from "./pages/AppPage";
 
 function HomeLayout() {
   return (
-    <>
+    <div className="App">
       <HomeHeader />
-      <AppPage />
-    </>
+      <Outlet />
+    </div>
   );
 }
 
