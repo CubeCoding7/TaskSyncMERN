@@ -41,7 +41,6 @@ body {
   font-weight: 700;
   margin: 0;
   height: 100vh;
-  /* background-image: var(--background-gradient-faded); */
   background-attachment: fixed;
 }
 

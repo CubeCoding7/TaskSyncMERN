@@ -1,9 +1,3 @@
-// import "../App.css";
-
-import HomeHeader from "../components/headers/HomeHeader";
-
-<HomeHeader />;
-
 function SignupPage() {
   return (
     <>

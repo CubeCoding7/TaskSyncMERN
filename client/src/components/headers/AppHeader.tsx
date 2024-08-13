@@ -1,9 +1,5 @@
 function AppHeader() {
-  return (
-    <header>
-      <h1>App Page Header</h1>
-    </header>
-  );
+  return <header></header>;
 }
 
 export default AppHeader;
