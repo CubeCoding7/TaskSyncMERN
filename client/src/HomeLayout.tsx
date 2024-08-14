@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import HomeHeader from "./components/headers/HomeHeader";
+import HomeHeader from "./components/navigation/HomeHeader";
 
 function HomeLayout() {
   return (
