@@ -1,0 +1,8 @@
+.appContainer {
+  display: flex;
+}
+
+.mainContent {
+  margin-left: 80px;
+  flex: 1;
+}

@@ -1,1 +1,86 @@
-/*  AppHeader.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+  padding: 0 15px;
+}
+
+.navLink {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navLink:hover {
+  color: #007bff;
+}
+
+.headerTitle {
+  font-size: 30px;
+  color: #333;
+  text-decoration: none;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.headerCenter {
+  flex: 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.searchBar input {
+  height: 36px;
+  width: 100%;
+  border: none;
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  font-size: large;
+  background-color: var(--main-color);
+  padding-left: 10px;
+}
+
+.searchBar button {
+  height: 38px;
+  width: 38px;
+  border: none;
+  color: var(--text-color);
+  border-left: 2px solid var(--text-color);
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: var(--main-color);
+  cursor: pointer;
+  margin: 5px 0px 5px;
+  font-size: large;
+}
+
+.searchBar input:focus {
+  outline: 2px solid var(--text-color);
+}
