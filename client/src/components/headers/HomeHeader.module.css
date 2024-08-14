@@ -1,23 +1,4 @@
-:root {
-  --text-color: #050505;
-  color: rgb(red, green, blue);
-}
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-body {
-  background-image: none;
-  background-color: white;
-}
-
-header {
+.header {
   top: 0;
   position: fixed;
   width: 1200px;
@@ -70,7 +51,7 @@ header {
   padding: 6px 13px 6px 13px;
 }
 
-.header-divider {
+.headerDivider {
   float: right;
   border-left: 1px solid var(--text-color);
   height: 24px;
@@ -87,7 +68,7 @@ header {
 }
 
 /* login and sign up form styles */
-form {
+.form {
   width: 360px;
   margin: 0 auto;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
@@ -96,7 +77,7 @@ form {
   background: white;
 }
 
-input {
+.formInput {
   padding: 10px 12px;
   border-radius: 4px;
   border: 1px solid #ddd;
@@ -104,12 +85,12 @@ input {
   width: 93%;
 }
 
-label {
+.formLabel {
   display: block;
   margin: 20px 0 10px;
 }
 
-button {
+.formButton {
   margin-top: 30px;
   border-radius: 36px;
   background-image: var(--background-gradient-deg);
