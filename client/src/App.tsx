@@ -3,8 +3,9 @@ import HomeLayout from "./HomeLayout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import AppPage from "./pages/AppPage";
+// import AppPage from "./pages/AppPage";
 import AppLayout from "./AppLayout";
+import PlaceholderPage from "./pages/PlaceHolderPage";
 
 function App() {
   return (
@@ -20,7 +21,11 @@ function App() {
             <Route path="/help" element={<SignupPage />} />
           </Route>
           <Route path="/app" element={<AppLayout />}>
-            <Route index element={<AppPage />} />
+            <Route index element={<PlaceholderPage />} />
+            <Route path="/app/tasks" element={<PlaceholderPage />} />
+            <Route path="/app/calendar" element={<PlaceholderPage />} />
+            <Route path="/app/notes" element={<PlaceholderPage />} />
+            <Route path="/app/settings" element={<PlaceholderPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

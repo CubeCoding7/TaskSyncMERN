@@ -34,7 +34,7 @@ function AppHeader() {
       </div>
 
       <div className={styles.headerRight}>
-        <Link to="/settings" className={styles.navLink}>
+        <Link to="/app/settings" className={styles.navLink}>
           <FontAwesomeIcon icon={faGear} />
         </Link>
         <button onClick={handleCollapseClick} className={styles.navLink}>
