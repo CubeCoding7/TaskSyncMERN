@@ -19,7 +19,7 @@ function AppHeader() {
         <button onClick={handleCollapseClick} className={styles.navLink}>
           <FontAwesomeIcon icon={faBars} />
         </button>
-        <Link to="/app" className={styles.headerTitle}>
+        <Link to="/app/home" className={styles.headerTitle}>
           TaskSync
         </Link>
       </div>

@@ -20,8 +20,8 @@ function App() {
             <Route path="/download" element={<SignupPage />} />
             <Route path="/help" element={<SignupPage />} />
           </Route>
-          <Route path="/app" element={<AppLayout />}>
-            <Route index element={<PlaceholderPage />} />
+          <Route element={<AppLayout />}>
+            <Route path="/app/home" element={<PlaceholderPage />} />
             <Route path="/app/tasks" element={<PlaceholderPage />} />
             <Route path="/app/calendar" element={<PlaceholderPage />} />
             <Route path="/app/notes" element={<PlaceholderPage />} />

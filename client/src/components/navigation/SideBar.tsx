@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -13,18 +13,42 @@ const Sidebar: React.FC = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.iconSection}>
-        <Link to="/app" className={styles.iconLink}>
+        <NavLink
+          to="/app/home"
+          className={({ isActive }) =>
+            isActive ? `${styles.iconLink} ${styles.active}` : styles.iconLink
+          }
+        >
+          <div className={styles.iconActiveLine}></div>
           <FontAwesomeIcon icon={faHome} />
-        </Link>
-        <Link to="/app/tasks" className={styles.iconLink}>
+        </NavLink>
+        <NavLink
+          to="/app/tasks"
+          className={({ isActive }) =>
+            isActive ? `${styles.iconLink} ${styles.active}` : styles.iconLink
+          }
+        >
+          <div className={styles.iconActiveLine}></div>
           <FontAwesomeIcon icon={faTasks} />
-        </Link>
-        <Link to="/app/calendar" className={styles.iconLink}>
+        </NavLink>
+        <NavLink
+          to="/app/calendar"
+          className={({ isActive }) =>
+            isActive ? `${styles.iconLink} ${styles.active}` : styles.iconLink
+          }
+        >
+          <div className={styles.iconActiveLine}></div>
           <FontAwesomeIcon icon={faCalendar} />
-        </Link>
-        <Link to="/app/notes" className={styles.iconLink}>
+        </NavLink>
+        <NavLink
+          to="/app/notes"
+          className={({ isActive }) =>
+            isActive ? `${styles.iconLink} ${styles.active}` : styles.iconLink
+          }
+        >
+          <div className={styles.iconActiveLine}></div>
           <FontAwesomeIcon icon={faStickyNote} />
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

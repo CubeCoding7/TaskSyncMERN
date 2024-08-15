@@ -36,11 +36,31 @@
 }
 
 .iconLink {
+  position: relative;
   font-size: 40px;
   color: var(--text-color);
   text-decoration: none;
+  /* border-left: 4px solid black; */
+  /* margin-left: -10px; */
+  /* padding-left: 10px; */
 }
 
 .iconLink:hover {
   color: var(--hover-text-color);
+}
+
+.iconActiveLine {
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 4px;
+  background-color: var(--text-color);
+  border-radius: 20px;
+  display: none;
+}
+
+.iconLink.active .iconActiveLine {
+  display: block;
 }
