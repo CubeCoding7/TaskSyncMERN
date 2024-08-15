@@ -5,4 +5,6 @@
 .mainContent {
   margin-left: 80px;
   flex: 1;
+  background-image: var(--background-gradient-faded);
+  height: 100vh;
 }
