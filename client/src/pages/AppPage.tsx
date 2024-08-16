@@ -1,7 +1,9 @@
+import Widget from "../components/Widget";
+
 function AppPage() {
   return (
     <>
-      <h1>App Page</h1>
+      <Widget />
     </>
   );
 }
