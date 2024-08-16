@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-import styles from "./navigation/SideBar.module.css";
+import styles from "./SideBar.module.css";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface Props {
