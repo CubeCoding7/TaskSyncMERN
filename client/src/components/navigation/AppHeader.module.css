@@ -90,4 +90,5 @@
 
 .searchBar input:focus {
   outline: 2px solid var(--text-color);
+  height: 32px;
 }
