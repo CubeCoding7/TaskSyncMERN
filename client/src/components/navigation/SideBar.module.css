@@ -40,13 +40,11 @@
   font-size: 40px;
   color: var(--text-color);
   text-decoration: none;
-  /* border-left: 4px solid black; */
-  /* margin-left: -10px; */
-  /* padding-left: 10px; */
+  width: 40px;
 }
 
-.iconLink:hover {
-  color: var(--hover-text-color);
+.iconLink svg {
+  width: 100%;
 }
 
 .iconActiveLine {
