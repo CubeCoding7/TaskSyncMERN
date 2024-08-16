@@ -11,15 +11,22 @@
   border: none;
   cursor: pointer;
   font-size: 30px;
-  padding: 8px 12px;
+  margin: 3px;
   color: #333;
   text-decoration: none;
   display: flex;
   align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.navLink svg {
+  width: 100%;
 }
 
 .navLink:hover {
-  color: #007bff;
+  background-color: var(--opacity-white);
+  border-radius: 10px;
 }
 
 .headerTitle {
