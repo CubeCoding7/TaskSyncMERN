@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import AppPage from "./pages/AppPage";
 import AppLayout from "./AppLayout";
 import PlaceholderPage from "./pages/PlaceHolderPage";
+import TaskPage from "./pages/TaskPage/TaskPage";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           </Route>
           <Route element={<AppLayout />}>
             <Route path="/app/home" element={<AppPage />} />
-            <Route path="/app/tasks" element={<PlaceholderPage />} />
+            <Route path="/app/tasks" element={<TaskPage />} />
             <Route path="/app/calendar" element={<PlaceholderPage />} />
             <Route path="/app/notes" element={<PlaceholderPage />} />
             <Route path="/app/settings" element={<PlaceholderPage />} />
