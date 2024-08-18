@@ -23,7 +23,6 @@
   color: inherit;
   background: var(--background-gradient-deg);
   background-clip: text;
-  color: transparent;
 }
 
 .nav_button,

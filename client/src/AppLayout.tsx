@@ -8,8 +8,8 @@ const AppLayout: React.FC = () => {
   return (
     <div className={styles.appContainer}>
       <Sidebar />
+      <AppHeader />
       <div className={styles.mainContent}>
-        <AppHeader />
         <Outlet />
       </div>
     </div>

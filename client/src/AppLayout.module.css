@@ -6,5 +6,7 @@
   margin-left: 80px;
   flex: 1;
   background-image: var(--background-gradient-faded);
+  background-attachment: fixed;
   height: 100vh;
+  padding-top: 60px;
 }
