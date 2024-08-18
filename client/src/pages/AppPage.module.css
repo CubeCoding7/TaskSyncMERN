@@ -1,0 +1,20 @@
+.widgets {
+  display: grid;
+  grid-template-columns: repeat(3, 310px);
+  gap: 30px;
+  justify-content: center;
+  padding-top: 25px;
+  color: var(--text-color);
+}
+
+@media (max-width: 1090px) {
+  .widgets {
+    grid-template-columns: repeat(2, 310px);
+  }
+}
+
+@media (max-width: 750px) {
+  .widgets {
+    grid-template-columns: 310px;
+  }
+}

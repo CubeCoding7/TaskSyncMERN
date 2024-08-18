@@ -1,10 +1,19 @@
 import Widget from "../components/Widget";
+import styles from "./AppPage.module.css";
+import {
+  faCalendarDays,
+  faListCheck,
+  faStickyNote,
+} from "@fortawesome/pro-solid-svg-icons";
 
 function AppPage() {
   return (
-    <>
-      <Widget />
-    </>
+    <div className={styles.widgets}>
+      <Widget name="Tasks" icon={faListCheck} />
+      <Widget name="Notes" icon={faStickyNote} />
+      <Widget name="Calendar" icon={faCalendarDays} />
+      <Widget name="Notes" icon={faStickyNote} />
+    </div>
   );
 }
 
