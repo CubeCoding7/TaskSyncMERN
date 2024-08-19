@@ -11,7 +11,7 @@ import {
   faSquareCheck,
 } from "@fortawesome/pro-solid-svg-icons";
 import styles from "./TaskNav.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function taskNav() {
   return (
@@ -35,58 +35,58 @@ function taskNav() {
         </div>
         <div className={styles.listWrapper}>
           <li>
-            <Link
+            <NavLink
               className="<%= activeSection==='Inbox' ? 'active' : '' %>"
               to="/app/tasks/inbox"
             >
               <FontAwesomeIcon className={styles.icon} icon={faInbox} />
               Inbox
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               className="<%= activeSection === 'All your tasks' ? 'active' : '' %>"
               to="/app/tasks/all"
             >
               <FontAwesomeIcon className={styles.icon} icon={faCheck} />
               All
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               className="<%= activeSection === 'Today&#39s tasks' ? 'active' : '' %>"
               to="/app/tasks/today"
             >
               <FontAwesomeIcon className={styles.icon} icon={faCalendarStar} />
               Today
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               className=" <%=activeSection==='Scheduled tasks' ? 'active' : '' %>"
               to="/app/tasks/scheduled"
             >
               <FontAwesomeIcon className={styles.icon} icon={faCalendarClock} />
               Scheduled
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               className="<%= activeSection === 'One Day' ? 'active' : '' %>"
               to="/app/tasks/one_day"
             >
               <FontAwesomeIcon className={styles.icon} icon={faCalendarImage} />
               One Day
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               className="<%= activeSection === 'Completed tasks' ? 'active' : '' %>"
               to="/app/tasks/completed"
             >
               <FontAwesomeIcon className={styles.icon} icon={faSquareCheck} />
               Completed
-            </Link>
+            </NavLink>
           </li>
         </div>
       </ul>

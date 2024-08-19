@@ -36,6 +36,7 @@
 
 .listWrapper a.active {
   background-color: var(--opacity-white);
+  font-weight: bold;
 }
 
 .icon {
