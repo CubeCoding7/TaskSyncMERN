@@ -1,0 +1,59 @@
+.tasksNav {
+  position: fixed;
+  justify-content: space-between;
+  border-right: 2px solid var(--text-color);
+  color: var(--text-color);
+  width: 230px;
+  height: 100%;
+}
+
+.wrapper {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 500;
+  font-size: larger;
+}
+
+.listWrapper li {
+  margin: 15px 5px 0 5px;
+  border-radius: 10px;
+}
+
+.listWrapper a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.listWrapper a:hover {
+  background-color: var(--opacity-white);
+  cursor: pointer;
+}
+
+.listWrapper a.active {
+  background-color: var(--opacity-white);
+}
+
+.icon {
+  padding-left: 20px;
+  padding-right: 5px;
+}
+
+.actionsWrapper {
+  padding: 5px 0px;
+  border-bottom: 2px solid var(--text-color);
+}
+
+.topBarActions {
+  display: flex;
+  list-style: none;
+  justify-content: right;
+}
+
+.topBarActions .icon {
+  font-size: x-large;
+}
