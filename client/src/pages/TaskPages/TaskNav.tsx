@@ -11,9 +11,24 @@ import {
   faSquareCheck,
 } from "@fortawesome/pro-solid-svg-icons";
 import styles from "./TaskNav.module.css";
-import { NavLink } from "react-router-dom";
 
-function taskNav() {
+type TaskCategory =
+  | "inbox"
+  | "all"
+  | "today"
+  | "scheduled"
+  | "one_day"
+  | "completed";
+
+interface TaskNavProps {
+  activeCategory: TaskCategory;
+  setActiveCategory: (category: TaskCategory) => void;
+}
+
+const TaskNav: React.FC<TaskNavProps> = ({
+  activeCategory,
+  setActiveCategory,
+}) => {
   return (
     <div className={styles.tasksNav}>
       <ul className={styles.wrapper}>
@@ -35,63 +50,75 @@ function taskNav() {
         </div>
         <div className={styles.listWrapper}>
           <li>
-            <NavLink
-              className="<%= activeSection==='Inbox' ? 'active' : '' %>"
-              to="/app/tasks/inbox"
+            <button
+              className={`${styles.navLink} ${
+                activeCategory === "inbox" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("inbox")}
             >
               <FontAwesomeIcon className={styles.icon} icon={faInbox} />
               Inbox
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              className="<%= activeSection === 'All your tasks' ? 'active' : '' %>"
-              to="/app/tasks/all"
+            <button
+              className={`${styles.navLink} ${
+                activeCategory === "all" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("all")}
             >
               <FontAwesomeIcon className={styles.icon} icon={faCheck} />
               All
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              className="<%= activeSection === 'Today&#39s tasks' ? 'active' : '' %>"
-              to="/app/tasks/today"
+            <button
+              className={`${styles.navLink} ${
+                activeCategory === "today" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("today")}
             >
               <FontAwesomeIcon className={styles.icon} icon={faCalendarStar} />
               Today
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              className=" <%=activeSection==='Scheduled tasks' ? 'active' : '' %>"
-              to="/app/tasks/scheduled"
+            <button
+              className={`${styles.navLink} ${
+                activeCategory === "scheduled" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("scheduled")}
             >
               <FontAwesomeIcon className={styles.icon} icon={faCalendarClock} />
               Scheduled
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              className="<%= activeSection === 'One Day' ? 'active' : '' %>"
-              to="/app/tasks/one_day"
+            <button
+              className={`${styles.navLink} ${
+                activeCategory === "one_day" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("one_day")}
             >
               <FontAwesomeIcon className={styles.icon} icon={faCalendarImage} />
               One Day
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              className="<%= activeSection === 'Completed tasks' ? 'active' : '' %>"
-              to="/app/tasks/completed"
+            <button
+              className={`${styles.navLink} ${
+                activeCategory === "completed" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("completed")}
             >
               <FontAwesomeIcon className={styles.icon} icon={faSquareCheck} />
               Completed
-            </NavLink>
+            </button>
           </li>
         </div>
       </ul>
     </div>
   );
-}
+};
 
-export default taskNav;
+export default TaskNav;

@@ -7,7 +7,6 @@ import AppPage from "./pages/AppPage";
 import AppLayout from "./AppLayout";
 import PlaceholderPage from "./pages/PlaceHolderPage";
 import TaskPage from "./pages/TaskPages/TaskPage";
-import TaskLayout from "./layouts/TaskLayout";
 
 function App() {
   return (
@@ -24,21 +23,7 @@ function App() {
           </Route>
           <Route element={<AppLayout />}>
             <Route path="/app/home" element={<AppPage />} />
-            <Route path="/app/tasks" element={<TaskLayout />}>
-              <Route index element={<TaskPage />} />
-              <Route path="/app/tasks/inbox" element={<PlaceholderPage />} />
-              <Route path="/app/tasks/all" element={<PlaceholderPage />} />
-              <Route path="/app/tasks/today" element={<PlaceholderPage />} />
-              <Route
-                path="/app/tasks/scheduled"
-                element={<PlaceholderPage />}
-              />
-              <Route path="/app/tasks/one_day" element={<PlaceholderPage />} />
-              <Route
-                path="/app/tasks/completed"
-                element={<PlaceholderPage />}
-              />
-            </Route>
+            <Route path="/app/tasks" element={<TaskPage />} />
             <Route path="/app/calendar" element={<PlaceholderPage />} />
             <Route path="/app/notes" element={<PlaceholderPage />} />
             <Route path="/app/settings" element={<PlaceholderPage />} />

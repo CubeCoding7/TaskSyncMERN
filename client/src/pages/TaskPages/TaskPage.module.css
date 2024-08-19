@@ -1,5 +1,15 @@
-.tasksBody {
-  display: flex;
+.taskPage {
   position: relative;
-  padding-bottom: 10px;
+}
+
+.tasksContent {
+  position: absolute;
+  left: 230px;
+  right: 0;
+  max-width: 800px;
+  margin: 20px auto 0px;
+}
+
+.tasksContent h2 {
+  font-size: 32px;
 }

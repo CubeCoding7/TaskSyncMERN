@@ -1,10 +1,8 @@
 .tasksNav {
-  position: fixed;
-  justify-content: space-between;
-  border-right: 2px solid var(--text-color);
-  color: var(--text-color);
   width: 230px;
+  position: fixed;
   height: 100%;
+  border-right: 2px solid var(--text-color);
 }
 
 .wrapper {
@@ -15,11 +13,38 @@
   font-size: larger;
 }
 
+.navLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  color: var(--text-color);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 3px 0px;
+  font-size: inherit;
+}
+
+.navLink:hover {
+  background-color: var(--opacity-white);
+}
+
+.navLink:focus {
+  outline: none;
+}
+
+.navLink.active {
+  background-color: var(--opacity-white);
+}
+
 .listWrapper li {
   margin: 15px 5px 0 5px;
   border-radius: 10px;
 }
-
+/*
 .listWrapper a {
   display: block;
   width: 100%;
@@ -37,7 +62,7 @@
 .listWrapper a.active {
   background-color: var(--opacity-white);
   font-weight: bold;
-}
+} */
 
 .icon {
   padding-left: 20px;
