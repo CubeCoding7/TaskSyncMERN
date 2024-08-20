@@ -2,6 +2,7 @@ import { useState } from "react";
 import TaskNav from "./TaskNav";
 import styles from "./TaskPage.module.css";
 import { TaskCategory } from "./types";
+import Task from "../../components/Task";
 
 function TaskPage() {
   const [activeCategory, setActiveCategory] = useState<TaskCategory>("inbox");
@@ -19,6 +20,11 @@ function TaskPage() {
         {activeCategory === "scheduled" && <h2>Scheduled Tasks</h2>}
         {activeCategory === "one_day" && <h2>One Day Tasks</h2>}
         {activeCategory === "completed" && <h2>Completed Tasks</h2>}
+        <div className={styles.tasks}>
+          <ul>
+            <Task />
+          </ul>
+        </div>
       </div>
     </div>
   );

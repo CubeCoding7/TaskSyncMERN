@@ -13,3 +13,8 @@
 .tasksContent h2 {
   font-size: 32px;
 }
+
+.tasks ul {
+  list-style: none;
+  padding: 0;
+}
