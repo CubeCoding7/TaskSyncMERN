@@ -22,7 +22,7 @@ function TaskPage() {
         {activeCategory === "completed" && <h2>Completed Tasks</h2>}
         <div className={styles.tasks}>
           <ul>
-            <Task />
+            <Task name="Cool" dueDate={new Date(2024, 7, 20)} />
           </ul>
         </div>
       </div>

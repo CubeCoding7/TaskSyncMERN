@@ -1,6 +1,11 @@
 import styles from "./Task.module.css";
 
-const Task = () => {
+interface Props {
+  name: string;
+  dueDate: Date;
+}
+
+const Task = ({ name, dueDate }: Props) => {
   return (
     <li>
       <div className={styles.task}>
@@ -8,8 +13,8 @@ const Task = () => {
           <input type="hidden" name="taskId" />
           <input type="checkbox" name="completed" />
         </form>
-        <p>Test</p>
-        <p className={styles.dueDate}>Jul 15</p>
+        <p>{name}</p>
+        <p className={styles.dueDate}>{dueDate.toLocaleDateString()}</p>
       </div>
     </li>
   );
