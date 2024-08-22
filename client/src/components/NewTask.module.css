@@ -1,52 +1,31 @@
 .newTaskForm {
+  display: flex;
+  flex-direction: column;
   background-color: var(--main-color);
   border-radius: 20px;
   box-shadow: 0px 5px 10px 4px var(--opacity-text);
+  padding: 10px;
+}
+
+.inputArea {
+  width: 100%;
+  flex-grow: 1;
 }
 
 .newTaskForm input[type="text"] {
-  margin-left: 15px;
   border: none;
   width: 95%;
   background-color: var(--main-color);
   overflow: scroll;
   display: block;
-  margin: 10px 15px 0px 15px;
   font-size: 14px;
   font-weight: 500;
   outline: none;
   color: var(--text-color);
 }
 
-.newTaskForm input[type="submit"] {
-  display: block;
-  margin: 10px;
-  float: right;
-  background-image: var(--background-gradient-deg);
-  border: none;
-  width: 90px;
-  height: 30px;
-  font-size: 15px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.newTaskForm button {
-  display: block;
-  margin: 10px 0px;
-  float: right;
-  background-color: var(--gray-alt-color);
-  border: none;
-  width: 90px;
-  height: 30px;
-  font-size: 15px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
 .newTaskForm textarea {
   width: 95%;
-  margin-left: 15px;
   background-color: var(--main-color);
   border: none;
   resize: none;
@@ -55,8 +34,39 @@
   color: var(--text-color);
 }
 
-.newTaskForm::after {
-  content: "";
-  display: block;
-  clear: both;
+.newTaskForm .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.newTaskForm input[type="date"] {
+  width: auto;
+  flex-grow: 0;
+}
+
+.newTaskForm .buttonGroup {
+  display: flex;
+}
+
+.newTaskForm .addButton,
+.newTaskForm .cancelButton {
+  width: 90px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+}
+
+.newTaskForm .addButton {
+  background-image: var(--background-gradient-deg);
+  color: white;
+}
+
+.newTaskForm .cancelButton {
+  margin-right: 10px;
+  background-color: var(--gray-alt-color);
+  color: black;
 }

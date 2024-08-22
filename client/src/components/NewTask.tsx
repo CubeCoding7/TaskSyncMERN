@@ -7,9 +7,17 @@ const NewTask = () => {
         <input type="text" name="name" placeholder="New task" required />
         <textarea name="description" placeholder="Description"></textarea>
       </div>
-      <input type="date" name="dueDate" />
-      <input type="submit" value={"Add Task"} />
-      <button type="button">Cancel</button>
+      <div className={styles.actions}>
+        <input type="date" name="dueDate" />
+        <div>
+          <button type="button" className={styles.cancelButton}>
+            Cancel
+          </button>
+          <button type="submit" className={styles.addButton}>
+            Add Task
+          </button>
+        </div>
+      </div>
     </form>
   );
 };
