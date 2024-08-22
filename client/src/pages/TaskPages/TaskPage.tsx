@@ -7,12 +7,16 @@ import NewTask from "../../components/NewTaskForm";
 
 function TaskPage() {
   const [activeCategory, setActiveCategory] = useState<TaskCategory>("inbox");
+  const [isVisible, setVisibility] = useState(false);
+
+  const toggleVisibility = () => setVisibility((prev) => !prev);
 
   return (
     <div className={styles.taskPage}>
       <TaskNav
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
+        toggleVisibility={toggleVisibility}
       />
       <div className={styles.tasksContent}>
         {activeCategory === "inbox" && <h2>Inbox</h2>}
@@ -26,7 +30,7 @@ function TaskPage() {
             <Task name="Cool" dueDate={new Date(2024, 7, 20)} />
           </ul>
         </div>
-        <NewTask />
+        {isVisible && <NewTask toggleVisibility={toggleVisibility} />}
       </div>
     </div>
   );

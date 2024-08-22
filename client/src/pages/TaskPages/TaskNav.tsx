@@ -23,11 +23,13 @@ type TaskCategory =
 interface TaskNavProps {
   activeCategory: TaskCategory;
   setActiveCategory: (category: TaskCategory) => void;
+  toggleVisibility: () => void;
 }
 
 const TaskNav: React.FC<TaskNavProps> = ({
   activeCategory,
   setActiveCategory,
+  toggleVisibility,
 }) => {
   return (
     <div className={styles.tasksNav}>
@@ -35,7 +37,10 @@ const TaskNav: React.FC<TaskNavProps> = ({
         <div className={styles.actionsWrapper}>
           <ul className={styles.topBarActions}>
             <li>
-              <button className={styles.topBarActionButton}>
+              <button
+                className={styles.topBarActionButton}
+                onClick={toggleVisibility}
+              >
                 <FontAwesomeIcon className={styles.icon} icon={faPlus} />
               </button>
             </li>

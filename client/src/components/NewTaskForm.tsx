@@ -1,6 +1,10 @@
 import styles from "./NewTaskForm.module.css";
 
-const NewTask = () => {
+interface Props {
+  toggleVisibility: () => void;
+}
+
+const NewTask = ({ toggleVisibility }: Props) => {
   return (
     <form action="/app/tasks/add/task" className={styles.newTaskForm}>
       <div className={styles.inputArea}>
@@ -10,7 +14,11 @@ const NewTask = () => {
       <div className={styles.actions}>
         <input type="date" name="dueDate" />
         <div>
-          <button type="button" className={styles.cancelButton}>
+          <button
+            type="button"
+            className={styles.cancelButton}
+            onClick={toggleVisibility}
+          >
             Cancel
           </button>
           <button type="submit" className={styles.addButton}>
