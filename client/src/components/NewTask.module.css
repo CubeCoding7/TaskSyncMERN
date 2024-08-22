@@ -1,0 +1,62 @@
+.newTaskForm {
+  background-color: var(--main-color);
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px 4px var(--opacity-text);
+}
+
+.newTaskForm input[type="text"] {
+  margin-left: 15px;
+  border: none;
+  width: 95%;
+  background-color: var(--main-color);
+  overflow: scroll;
+  display: block;
+  margin: 10px 15px 0px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  color: var(--text-color);
+}
+
+.newTaskForm input[type="submit"] {
+  display: block;
+  margin: 10px;
+  float: right;
+  background-image: var(--background-gradient-deg);
+  border: none;
+  width: 90px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.newTaskForm button {
+  display: block;
+  margin: 10px 0px;
+  float: right;
+  background-color: var(--gray-alt-color);
+  border: none;
+  width: 90px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.newTaskForm textarea {
+  width: 95%;
+  margin-left: 15px;
+  background-color: var(--main-color);
+  border: none;
+  resize: none;
+  height: 160px;
+  outline: none;
+  color: var(--text-color);
+}
+
+.newTaskForm::after {
+  content: "";
+  display: block;
+  clear: both;
+}

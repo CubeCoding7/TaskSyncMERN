@@ -3,6 +3,7 @@ import TaskNav from "./TaskNav";
 import styles from "./TaskPage.module.css";
 import { TaskCategory } from "./types";
 import Task from "../../components/Task";
+import NewTask from "../../components/NewTask";
 
 function TaskPage() {
   const [activeCategory, setActiveCategory] = useState<TaskCategory>("inbox");
@@ -25,6 +26,7 @@ function TaskPage() {
             <Task name="Cool" dueDate={new Date(2024, 7, 20)} />
           </ul>
         </div>
+        <NewTask />
       </div>
     </div>
   );
