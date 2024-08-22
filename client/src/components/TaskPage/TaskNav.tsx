@@ -20,42 +20,39 @@ type TaskCategory =
   | "one_day"
   | "completed";
 
-interface TaskNavProps {
+interface Props {
   activeCategory: TaskCategory;
   setActiveCategory: (category: TaskCategory) => void;
   toggleVisibility: () => void;
 }
 
-const TaskNav: React.FC<TaskNavProps> = ({
+const TaskNav = ({
   activeCategory,
   setActiveCategory,
   toggleVisibility,
-}) => {
+}: Props) => {
   return (
     <div className={styles.tasksNav}>
       <ul className={styles.wrapper}>
-        <div className={styles.actionsWrapper}>
-          <ul className={styles.topBarActions}>
+        <div className={styles.topBarWrapper}>
+          <ul className={styles.topBar}>
             <li>
-              <button
-                className={styles.topBarActionButton}
-                onClick={toggleVisibility}
-              >
+              <button className={styles.button} onClick={toggleVisibility}>
                 <FontAwesomeIcon className={styles.icon} icon={faPlus} />
               </button>
             </li>
             <li>
-              <button className={styles.topBarActionButton}>
+              <button className={styles.button}>
                 <FontAwesomeIcon className={styles.icon} icon={faFolderPlus} />
               </button>
             </li>
             <li>
-              {/* <button className={styles.topBarActionButton}> */}
-              <FontAwesomeIcon
-                className={`${styles.icon} ${styles.rectangleHistoryCirclePlus}`}
-                icon={faRectangleHistoryCirclePlus}
-              />
-              {/* </button> */}
+              <button className={styles.button} aria-label="Add History">
+                <FontAwesomeIcon
+                  className={styles.icon}
+                  icon={faRectangleHistoryCirclePlus}
+                />
+              </button>
             </li>
           </ul>
         </div>
