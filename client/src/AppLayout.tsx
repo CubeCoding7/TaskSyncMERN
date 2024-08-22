@@ -10,6 +10,7 @@ const AppLayout: React.FC = () => {
       <Sidebar />
       <AppHeader />
       <div className={styles.mainContent}>
+        <div className={styles.background}></div>
         <Outlet />
       </div>
     </div>
