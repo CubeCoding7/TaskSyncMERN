@@ -1,4 +1,4 @@
-import styles from "./NewTask.module.css";
+import styles from "./NewTaskForm.module.css";
 
 const NewTask = () => {
   return (

@@ -35,16 +35,22 @@ const TaskNav: React.FC<TaskNavProps> = ({
         <div className={styles.actionsWrapper}>
           <ul className={styles.topBarActions}>
             <li>
-              <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+              <button className={styles.topBarActionButton}>
+                <FontAwesomeIcon className={styles.icon} icon={faPlus} />
+              </button>
             </li>
             <li>
-              <FontAwesomeIcon className={styles.icon} icon={faFolderPlus} />
+              <button className={styles.topBarActionButton}>
+                <FontAwesomeIcon className={styles.icon} icon={faFolderPlus} />
+              </button>
             </li>
             <li>
+              {/* <button className={styles.topBarActionButton}> */}
               <FontAwesomeIcon
                 className={`${styles.icon} ${styles.rectangleHistoryCirclePlus}`}
                 icon={faRectangleHistoryCirclePlus}
               />
+              {/* </button> */}
             </li>
           </ul>
         </div>
