@@ -1,9 +1,9 @@
 import { useState } from "react";
-import TaskNav from "./TaskNav";
+import TaskNav from "../../components/TaskPage/TaskNav";
 import styles from "./TaskPage.module.css";
 import { TaskCategory } from "./types";
-import Task from "../../components/Task";
-import NewTask from "../../components/NewTaskForm";
+import Task from "../../components/TaskPage/Task";
+import NewTask from "../../components/TaskPage/NewTaskForm";
 
 function TaskPage() {
   const [activeCategory, setActiveCategory] = useState<TaskCategory>("inbox");

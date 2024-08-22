@@ -6,7 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import AppPage from "./pages/AppPage";
 import AppLayout from "./AppLayout";
 import PlaceholderPage from "./pages/PlaceHolderPage";
-import TaskPage from "./pages/TaskPages/TaskPage";
+import TaskPage from "./pages/TaskPage";
 
 function App() {
   return (
