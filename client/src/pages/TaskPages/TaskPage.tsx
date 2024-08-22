@@ -15,12 +15,12 @@ function TaskPage() {
         setActiveCategory={setActiveCategory}
       />
       <div className={styles.tasksContent}>
-        {activeCategory === "inbox" && <h2>Inbox Tasks</h2>}
-        {activeCategory === "all" && <h2>All Tasks</h2>}
-        {activeCategory === "today" && <h2>Today's Tasks</h2>}
-        {activeCategory === "scheduled" && <h2>Scheduled Tasks</h2>}
-        {activeCategory === "one_day" && <h2>One Day Tasks</h2>}
-        {activeCategory === "completed" && <h2>Completed Tasks</h2>}
+        {activeCategory === "inbox" && <h2>Inbox</h2>}
+        {activeCategory === "all" && <h2>All</h2>}
+        {activeCategory === "today" && <h2>Today</h2>}
+        {activeCategory === "scheduled" && <h2>Scheduled</h2>}
+        {activeCategory === "one_day" && <h2>One Day</h2>}
+        {activeCategory === "completed" && <h2>Completed</h2>}
         <div className={styles.tasks}>
           <ul>
             <Task name="Cool" dueDate={new Date(2024, 7, 20)} />
