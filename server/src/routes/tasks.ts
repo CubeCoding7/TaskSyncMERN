@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import {
+  getTasks,
   getTask,
   createTask,
   deleteTask,
@@ -8,14 +9,14 @@ import {
 
 const router = express.Router();
 
-router.get("/placeholder", getTask);
+router.get("/", getTasks);
 
-router.post("/tasks/addTask", createTask);
+router.get("/:id", getTask);
 
-router.post("/placeholder", createTask);
+router.post("/", createTask);
 
-router.delete("/placeholder", deleteTask);
+router.delete("/:id", deleteTask);
 
-router.patch("/placeholder", updateTask);
+router.patch("/:id", updateTask);
 
 export default router;

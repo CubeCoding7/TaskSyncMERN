@@ -8,16 +8,10 @@ const taskSchema = new Schema(
       type: String,
       required: true,
     },
-    description: { type: String },
+    description: {
+      type: String,
+    },
     dueDate: { type: Date },
-    userID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    completed: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );

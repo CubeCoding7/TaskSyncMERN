@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Task from "../models/Task";
+import Task from "../models/taskSchema";
 import mongoose from "mongoose";
 
 //get all task
@@ -28,21 +28,27 @@ const getTask = async (req: Request, res: Response) => {
 
 // create new task
 const createTask = async (req: Request, res: Response) => {
-  const { name, description } = req.body;
+  const { name, description, dueDate } = req.body;
 
-  let emptyFields: string[] = [];
+  const emptyFields: string[] = [];
 
-  if (!name) emptyFields.push("name");
-  if (!description) emptyFields.push("description");
-
-  if (emptyFields.length > 0) {
+  if (!name) {
+    emptyFields.push("name");
+  }
+  if (!description) {
+    emptyFields.push("description");
+  }
+  if (!dueDate) {
+    emptyFields.push("dueDate");
+  }
+  if (emptyFields.length! > 3) {
     return res
       .status(400)
       .json({ error: "Please fill in all the fields", emptyFields });
   }
 
   try {
-    const task = await Task.create({ name, description });
+    const task = await Task.create({ name, description, dueDate });
     res.status(200).json(task);
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });

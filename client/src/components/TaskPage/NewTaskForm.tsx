@@ -1,43 +1,49 @@
 import React, { useState } from "react";
 import styles from "./NewTaskForm.module.css";
+import { useTasksContext } from "../../hooks/useTasksContext";
 
 interface Props {
   toggleVisibility: () => void;
 }
 
 const NewTaskForm = ({ toggleVisibility }: Props) => {
+  const { dispatch } = useTasksContext();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const taskData = {
-      name,
-      description,
-      dueDate,
-    };
+    const task = { name, description, dueDate };
 
-    try {
-      const response = await fetch("http://localhost:5000/api/tasks/addTask", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(taskData),
-      });
+    const response = await fetch("http://localhost:5000/api/tasks", {
+      method: "POST",
+      body: JSON.stringify(task),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
 
-      if (response.ok) {
-        // Handle success (e.g., show a success message, clear form, etc.)
-        toggleVisibility();
-      } else {
-        // Handle errors
-        const result = await response.json();
-        console.error(result.error);
-      }
-    } catch (error) {
-      console.error("Error:", error);
+    if (!response.ok) {
+      setError(json.error);
+      setEmptyFields(json.emptyFields || []); // Default to empty array if undefined
+    }
+
+    if (response.ok) {
+      setName("");
+      setDescription("");
+      setDueDate("");
+      setError(null);
+      setEmptyFields([]);
+      console.log("new task added", json);
+      dispatch({ type: "CREATE_TASK", payload: json });
+
+      // Hide the form if the task was successfully added
+      toggleVisibility();
     }
   };
 
@@ -46,25 +52,25 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
       <div className={styles.inputArea}>
         <input
           type="text"
-          name="name"
-          placeholder="New task"
-          value={name}
+          placeholder="name"
           onChange={(e) => setName(e.target.value)}
-          required
+          value={name}
+          className={emptyFields.includes("name") ? "error" : ""}
         />
         <textarea
           name="description"
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          className={emptyFields.includes("description") ? "error" : ""}
         ></textarea>
       </div>
       <div className={styles.actions}>
         <input
-          type="date"
-          name="dueDate"
-          value={dueDate}
+          type="Date"
           onChange={(e) => setDueDate(e.target.value)}
+          value={dueDate}
+          className={emptyFields.includes("dueDate") ? "error" : ""}
         />
         <div>
           <button
@@ -77,6 +83,8 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
           <button type="submit" className={styles.addButton}>
             Add Task
           </button>
+
+          {error && <div className={styles.error}>{error}</div>}
         </div>
       </div>
     </form>
