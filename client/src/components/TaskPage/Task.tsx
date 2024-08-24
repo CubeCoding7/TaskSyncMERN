@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 // import { useTasksContext } from "../../hooks/useTasksContext";
 import styles from "./Task.module.css";
+import Checkbox from "./Checkbox";
 
 interface Task {
   _id: string;
@@ -15,39 +16,29 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ task }) => {
-  // const { dispatch } = useTasksContext();
-
-  // const handleClick = async () => {
-  //   try {
-  //     const response = await fetch(`/api/tasks/${task._id}`, {
-  //       method: "DELETE",
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to delete task");
-  //     }
-
-  //     const json = await response.json();
-  //     dispatch({ type: "DELETE_TASK", payload: json });
-  //   } catch (error) {
-  //     console.error("Error deleting task:", error);
-  //   }
-  // };
+  const [isChecked, setIsChecked] = useState(false);
 
   const formatDate = (date: Date | string) => {
     const d = new Date(date);
-    return d.toLocaleDateString();
+
+    const timezoneOffset = d.getTimezoneOffset() * 60000;
+    const localDate = new Date(d.getTime() + timezoneOffset);
+    return localDate.toLocaleDateString();
   };
 
+  const handleCheckboxChange = (checked: boolean) => {
+    setIsChecked(checked);
+  };
   return (
     <div className={styles.task}>
-      <form action="/app/tasks/toggle" method="POST">
+      {/* <form action="/app/tasks/toggle" method="POST">
         <input type="hidden" name="taskId" />
         <input type="checkbox" name="completed" />
-      </form>
+      </form> */}
+      <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
       <p>{task.name}</p>
       <p className={styles.dueDate}>
-        {task.createdAt ? formatDate(task.createdAt) : "No creation date"}
+        {task.dueDate ? formatDate(task.dueDate) : ""}
       </p>
     </div>
   );
