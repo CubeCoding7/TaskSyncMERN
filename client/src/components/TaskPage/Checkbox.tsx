@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/pro-solid-svg-icons";
+import styles from "./Checkbox.module.css";
 
 interface CheckboxProps {
   checked: boolean;
@@ -8,30 +9,30 @@ interface CheckboxProps {
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange }) => {
+  const [hovered, setHovered] = useState(false);
+
   const handleCheckboxChange = () => {
     onChange(!checked);
+  };
+
+  const showCheckboxIcon = () => {
+    setHovered(true);
+  };
+
+  const hideCheckboxIcon = () => {
+    setHovered(false);
   };
 
   return (
     <div
       onClick={handleCheckboxChange}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        cursor: "pointer",
-      }}
+      onMouseEnter={showCheckboxIcon}
+      onMouseLeave={hideCheckboxIcon}
+      className={styles.checkboxWrapper}
+      style={{}}
     >
-      <div
-        style={{
-          width: 20,
-          height: 20,
-          border: "1px solid #ccc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {checked && <FontAwesomeIcon icon={faCheck} />}
+      <div className={`${styles.checkbox} ${hovered ? styles.checked : ""}`}>
+        {checked && <FontAwesomeIcon className={styles.icon} icon={faCheck} />}
       </div>
     </div>
   );

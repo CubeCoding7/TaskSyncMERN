@@ -1,0 +1,26 @@
+.checkboxWrapper {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.checkbox {
+  width: 17px;
+  height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid var(--gray-alt-color);
+  background-color: var(--main-color);
+}
+
+.checked {
+  width: 19px;
+  height: 19px;
+}
+
+.icon {
+  color: var(--gray-alt-color);
+}
