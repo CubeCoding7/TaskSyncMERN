@@ -19,6 +19,7 @@
 .checked {
   width: 19px;
   height: 19px;
+  margin: -1px;
 }
 
 .icon {
