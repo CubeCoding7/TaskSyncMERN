@@ -7,10 +7,18 @@ import {
   faUser,
 } from "@fortawesome/pro-solid-svg-icons";
 import styles from "./AppHeader.module.css";
+import Dropdown from "./Dropdown/Dropdown";
+import { useState } from "react";
 
 function AppHeader() {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
   const handleCollapseClick = () => {
     // a script to collapse/uncollapse the sidebar
+  };
+
+  const handleCollapseDropdown = () => {
+    setDropdownVisible(!isDropdownVisible);
   };
 
   return (
@@ -37,9 +45,12 @@ function AppHeader() {
         <Link to="/app/settings" className={styles.navLink}>
           <FontAwesomeIcon icon={faGear} />
         </Link>
-        <button onClick={handleCollapseClick} className={styles.navLink}>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
+        <div className="profileDropdown">
+          <button onClick={handleCollapseDropdown} className={styles.navLink}>
+            <FontAwesomeIcon icon={faUser} />
+          </button>
+          <Dropdown isVisible={isDropdownVisible} />
+        </div>
       </div>
     </header>
   );

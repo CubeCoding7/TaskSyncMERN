@@ -1,0 +1,74 @@
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: var(--main-color);
+  right: 5px;
+  width: 330px;
+  z-index: 1;
+  margin-top: 6px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  box-shadow: -8px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdownContent a {
+  display: block;
+  padding: 6px 0px 6px 15px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.dropdownContent a:last-child {
+  margin-bottom: 6px;
+}
+
+.dropdownContent a:hover {
+  background-color: var(--alt-color);
+}
+
+.dropdownContent img {
+  height: 40px;
+}
+
+.dropdownContent.show {
+  display: block;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 15px 0px 15px 15px;
+}
+
+.profile img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+
+.profileDetails span:first-child {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.profileDetails span:last-child {
+  font-size: 0.9em;
+  color: #636363;
+  font-weight: 600;
+}
+
+.sectionDivider {
+  content: "";
+  border: 1px solid var(--alt-color);
+  margin: 10px 7px 10px 7px;
+  border-radius: 50px;
+}
