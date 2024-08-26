@@ -28,19 +28,25 @@ const Login: React.FC = () => {
         required
         onChange={(e) => setEmail(e.target.value)}
         value={email}
+        className={styles.input}
       />
       {/* <div className="email error"></div> */}
-      <label htmlFor="password">Password</label>
+      <label className={styles.label} htmlFor="password">
+        Password
+      </label>
       <input
         type="password"
         name="password"
         required
         onChange={(e) => setPassword(e.target.value)}
         value={password}
+        className={styles.input}
       />
       {/* <div className="password error"></div> */}
-      <button disabled={isLoading === true}>Log in</button>
-      {error && <div className="error">{error}</div>}
+      <button className={styles.button} disabled={isLoading === true}>
+        Log in
+      </button>
+      {error && <div className={styles.error}>{error}</div>}
     </form>
   );
 };
