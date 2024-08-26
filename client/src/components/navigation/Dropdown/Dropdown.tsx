@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 import styles from "./Dropdown.module.css";
+import { useLogout } from "../../../hooks/useLogout";
 
 interface DropdownProps {
   isVisible: boolean;
 }
 
 const Dropdown = ({ isVisible }: DropdownProps) => {
+  const { logout } = useLogout();
+
+  const handleClick = () => {
+    logout();
+  };
+
   return (
     <div
       className={`${styles.dropdownContent} ${isVisible ? styles.show : ""}`}
@@ -35,7 +42,7 @@ const Dropdown = ({ isVisible }: DropdownProps) => {
       <div className={styles.sectionDivider}></div>
       <div>
         <Link to="/download">Download the app</Link>
-        <Link to="/logout">Logout</Link>
+        <button onClick={handleClick}>Logout</button>
       </div>
     </div>
   );

@@ -11,13 +11,15 @@
   box-shadow: -8px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
-.dropdownContent a {
+.dropdownContent a,
+.dropdownContent button {
   display: block;
   padding: 6px 0px 6px 15px;
   text-decoration: none;
   color: var(--text-color);
   font-size: 0.9em;
   font-weight: 500;
+  font-family: inherit;
 }
 
 .dropdownContent a:last-child {
@@ -26,6 +28,22 @@
 
 .dropdownContent a:hover {
   background-color: var(--alt-color);
+}
+
+.dropdownContent button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdownContent button:hover {
+  background-color: var(--alt-color);
+}
+
+.dropdownContent button:last-child {
+  margin-bottom: 6px;
 }
 
 .dropdownContent img {
