@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, ReactNode } from "react";
+import React, { createContext, useReducer, ReactNode, useEffect } from "react";
 
 // Define the User interface
 export interface User {
@@ -50,6 +50,15 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
   });
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (user) {
+      const parsedUser: User = JSON.parse(user);
+      dispatch({ type: "LOGIN", payload: parsedUser } as AuthAction);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
