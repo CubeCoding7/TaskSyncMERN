@@ -3,7 +3,9 @@ import Task from "../models/taskSchema";
 import mongoose from "mongoose";
 
 const getTasks = async (req: Request, res: Response) => {
-  const tasks = await Task.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+
+  const tasks = await Task.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(tasks);
 };
@@ -44,8 +46,13 @@ const createTask = async (req: Request, res: Response) => {
       .json({ error: "Please fill in all the fields", emptyFields });
   }
 
+  if (!req.user) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   try {
-    const task = await Task.create({ name, description, dueDate });
+    const user_id = req.user._id;
+    const task = await Task.create({ name, description, dueDate, user_id });
     res.status(200).json(task);
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });

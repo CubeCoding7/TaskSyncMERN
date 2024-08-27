@@ -5,6 +5,7 @@ import validator from "validator";
 interface IUser extends Document {
   email: string;
   password: string;
+  user_id: string; // Add user_id for better identification
 }
 
 interface IUserModel extends Model<IUser> {
@@ -22,6 +23,12 @@ const userSchema = new Schema<IUser, IUserModel>(
     password: {
       type: String,
       required: true,
+    },
+    user_id: {
+      type: String,
+      required: true,
+      unique: true,
+      default: () => new mongoose.Types.ObjectId().toString(), // Generate a unique ID by default
     },
   },
   { timestamps: true }
