@@ -18,7 +18,19 @@ function TaskPage() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/tasks");
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+        const token = user.token;
+
+        if (!token) {
+          throw new Error("Token is missing");
+        }
+
+        const response = await fetch("http://localhost:5000/api/tasks", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         const text = await response.text();
         console.log("Response text:", text);
         const json = JSON.parse(text);
@@ -48,9 +60,8 @@ function TaskPage() {
           {/* <ul>
             <Task name="Cool" dueDate={new Date(2024, 7, 20)} />
           </ul> */}
-          {state.tasks.map((task) => (
-            <Task key={task._id} task={task} />
-          ))}
+          {Array.isArray(state.tasks) &&
+            state.tasks.map((task) => <Task key={task._id} task={task} />)}
         </div>
         {isVisible && <NewTaskForm toggleVisibility={toggleVisibility} />}
       </div>

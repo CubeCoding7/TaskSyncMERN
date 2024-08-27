@@ -6,8 +6,11 @@ import {
   deleteTask,
   updateTask,
 } from "../controllers/taskController";
+import requireAuth from "../../middleware/requireAuth";
 
 const router = express.Router();
+
+router.use(requireAuth);
 
 router.get("/", getTasks);
 

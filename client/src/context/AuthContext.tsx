@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, ReactNode, useEffect } from "react";
+import { authReducer } from "../reducers/authReducer";
 
 // Define the User interface
 export interface User {
@@ -22,21 +23,6 @@ export const AuthContext = createContext<
     }
   | undefined
 >(undefined);
-
-// Define the authReducer
-export const authReducer = (
-  state: AuthState,
-  action: AuthAction
-): AuthState => {
-  switch (action.type) {
-    case "LOGIN":
-      return { user: action.payload };
-    case "LOGOUT":
-      return { user: null };
-    default:
-      return state;
-  }
-};
 
 // Define the AuthContextProviderProps interface
 interface AuthContextProviderProps {
