@@ -1,10 +1,10 @@
-import { State, Action, Task } from "../context/TaskContext"; // Adjust import paths as needed
+import { State, Action, Task } from "../context/TaskContext";
 
 export const tasksReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_TASKS":
       return {
-        tasks: Array.isArray(action.payload) ? (action.payload as Task[]) : [], // Ensure it's an array
+        tasks: Array.isArray(action.payload) ? (action.payload as Task[]) : [],
       };
     case "CREATE_TASK":
       return {

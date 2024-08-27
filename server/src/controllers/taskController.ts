@@ -2,14 +2,12 @@ import { Request, Response } from "express";
 import Task from "../models/taskSchema";
 import mongoose from "mongoose";
 
-//get all task
 const getTasks = async (req: Request, res: Response) => {
   const tasks = await Task.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(tasks);
 };
 
-//get a single task
 const getTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -26,7 +24,6 @@ const getTask = async (req: Request, res: Response) => {
   res.status(200).json(task);
 };
 
-// create new task
 const createTask = async (req: Request, res: Response) => {
   const { name, description, dueDate } = req.body;
 
@@ -55,7 +52,6 @@ const createTask = async (req: Request, res: Response) => {
   }
 };
 
-//delete a task
 const deleteTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -72,7 +68,6 @@ const deleteTask = async (req: Request, res: Response) => {
   res.status(200).json(task);
 };
 
-//update a task
 const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
 

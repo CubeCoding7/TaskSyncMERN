@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
-// Define types for the function parameters and the return values
 interface SignupResponse {
   id: string;
   email: string;
   token: string;
-  error?: string; // Optional error field in case of unsuccessful response
+  error?: string;
 }
 
 export const useSignup = () => {

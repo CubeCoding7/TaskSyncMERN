@@ -16,7 +16,6 @@ function TaskPage() {
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
   const { state, dispatch } = useTasksContext();
-  // const { tasks } = state;
 
   useEffect(() => {
     const fetchTasks = async () => {

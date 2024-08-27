@@ -11,7 +11,6 @@ import userRoutes from "./routes/user";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware setup
 app.use(cors());
 app.use(express.json());
 
@@ -20,17 +19,14 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// Routes
 app.use("/api/tasks", taskRoutes);
 app.use("/api/user", userRoutes);
 
-// Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send("Something went wrong!");
 });
 
-// Database connection and server start
 mongoose
   .connect(process.env.MONGO_URI!)
   .then(() => {

@@ -28,7 +28,6 @@ const userSchema = new Schema<IUser, IUserModel>(
 );
 
 userSchema.statics.signup = async function (email: string, password: string) {
-  //validation
   if (!email || !password) {
     throw Error("All fields must be filled");
   }

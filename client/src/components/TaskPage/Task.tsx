@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useTasksContext } from "../../hooks/useTasksContext";
 import styles from "./Task.module.css";
 import Checkbox from "./Checkbox";
 

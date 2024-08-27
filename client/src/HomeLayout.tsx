@@ -1,4 +1,3 @@
-// HomeLayout.tsx
 import { Outlet } from "react-router-dom";
 import HomeHeader from "./components/navigation/HomeHeader";
 

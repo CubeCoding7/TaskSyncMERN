@@ -10,14 +10,12 @@ const createToken = (_id: string) => {
   return jwt.sign({ _id }, secret, { expiresIn: "3d" });
 };
 
-// login user
 const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.login(email, password);
 
-    //create token
     const token = createToken(String(user._id));
 
     res.status(201).json({ email, token });
@@ -30,14 +28,12 @@ const loginUser = async (req: Request, res: Response) => {
   }
 };
 
-// signup user
 const signupUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.signup(email, password);
 
-    //create token
     const token = createToken(String(user._id));
 
     res.status(201).json({ email, token });

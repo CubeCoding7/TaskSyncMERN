@@ -39,7 +39,7 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
 
     if (!response.ok) {
       setError(json.error);
-      setEmptyFields(json.emptyFields || []); // Default to empty array if undefined
+      setEmptyFields(json.emptyFields || []);
     }
 
     if (response.ok) {
@@ -51,7 +51,6 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
       console.log("new task added", json);
       dispatch({ type: "CREATE_TASK", payload: json });
 
-      // Hide the form if the task was successfully added
       toggleVisibility();
     }
   };
