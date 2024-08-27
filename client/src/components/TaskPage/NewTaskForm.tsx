@@ -11,11 +11,19 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [emptyFields, setEmptyFields] = useState<string[]>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    const token = user.token;
+
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
 
     const task = { name, description, dueDate };
 
@@ -24,6 +32,7 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
       body: JSON.stringify(task),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
     const json = await response.json();

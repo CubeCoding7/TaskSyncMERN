@@ -5,10 +5,13 @@ import { TaskCategory } from "./types";
 import Task from "../../components/TaskPage/Task";
 import NewTaskForm from "../../components/TaskPage/NewTaskForm";
 import { useTasksContext } from "../../hooks/useTasksContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function TaskPage() {
   const [activeCategory, setActiveCategory] = useState<TaskCategory>("inbox");
   const [isVisible, setVisibility] = useState(false);
+
+  const { user } = useAuthContext();
 
   const toggleVisibility = () => setVisibility((prev) => !prev);
 
@@ -39,8 +42,10 @@ function TaskPage() {
         console.error("Failed to fetch tasks:", error);
       }
     };
-    fetchTasks();
-  }, [dispatch]);
+    if (user) {
+      fetchTasks();
+    }
+  }, [dispatch, user]);
 
   return (
     <div className={styles.taskPage}>
