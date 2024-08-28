@@ -21,7 +21,9 @@ const Login: React.FC = () => {
   return (
     <form className={styles.login} onSubmit={handleSubmit}>
       <h2>Log in</h2>
-      <label htmlFor="email">Email</label>
+      <label className={styles.label} htmlFor="email">
+        Email
+      </label>
       <input
         type="text"
         name="email"

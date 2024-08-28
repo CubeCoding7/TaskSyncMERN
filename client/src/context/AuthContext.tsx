@@ -3,6 +3,8 @@ import { authReducer } from "../reducers/authReducer";
 
 export interface User {
   id: string;
+  firstName: string;
+  lastName: string;
   email: string;
 }
 

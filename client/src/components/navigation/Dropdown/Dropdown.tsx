@@ -10,6 +10,7 @@ interface DropdownProps {
 const Dropdown = ({ isVisible }: DropdownProps) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  console.log(user);
 
   const handleClick = () => {
     logout();
@@ -23,9 +24,7 @@ const Dropdown = ({ isVisible }: DropdownProps) => {
         <div className={styles.profile}>
           <img src="/img/logo.svg" alt="" />
           <div className={styles.profileDetails}>
-            <span>
-              Samuel Johnston{/* <%= user.firstName + ' ' + user.lastName %> */}
-            </span>
+            <span>{user && user.firstName + " " + user.lastName}</span>
             <span>{user && user.email}</span>
           </div>
         </div>

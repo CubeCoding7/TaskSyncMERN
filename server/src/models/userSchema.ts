@@ -3,18 +3,33 @@ import bcrypt from "bcrypt";
 import validator from "validator";
 
 interface IUser extends Document {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  user_id: string; // Add user_id for better identification
+  user_id: string;
 }
 
 interface IUserModel extends Model<IUser> {
-  signup(email: string, password: string): Promise<IUser>;
+  signup(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ): Promise<IUser>;
   login(email: string, password: string): Promise<IUser>;
 }
 
 const userSchema = new Schema<IUser, IUserModel>(
   {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -28,14 +43,19 @@ const userSchema = new Schema<IUser, IUserModel>(
       type: String,
       required: true,
       unique: true,
-      default: () => new mongoose.Types.ObjectId().toString(), // Generate a unique ID by default
+      default: () => new mongoose.Types.ObjectId().toString(),
     },
   },
   { timestamps: true }
 );
 
-userSchema.statics.signup = async function (email: string, password: string) {
-  if (!email || !password) {
+userSchema.statics.signup = async function (
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
+) {
+  if (!email || !password || !firstName || !lastName) {
     throw Error("All fields must be filled");
   }
   if (!validator.isEmail(email)) {
@@ -54,7 +74,12 @@ userSchema.statics.signup = async function (email: string, password: string) {
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, password: hash });
+  const user = await this.create({
+    firstName,
+    lastName,
+    email,
+    password: hash,
+  });
 
   return user;
 };

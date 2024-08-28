@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
 interface SignupResponse {
+  firstName: string;
+  lastName: string;
   id: string;
   email: string;
   token: string;
@@ -13,7 +15,12 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { dispatch } = useAuthContext();
 
-  const signup = async (email: string, password: string) => {
+  const signup = async (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) => {
     setIsLoading(true);
     setError(null);
 
@@ -21,7 +28,7 @@ export const useSignup = () => {
       const response = await fetch("http://localhost:5000/api/user/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password }),
       });
 
       const json: SignupResponse = await response.json();
