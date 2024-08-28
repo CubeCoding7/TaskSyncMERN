@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 import HomeLayout from "./HomeLayout";
@@ -9,19 +9,15 @@ import AppPage from "./pages/AppPage";
 import AppLayout from "./AppLayout";
 import PlaceholderPage from "./pages/PlaceHolderPage";
 import TaskPage from "./pages/TaskPage";
-import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={!user ? <HomeLayout /> : <Navigate to="/app/home" />}
-          >
+          <Route path="/" element={<HomeLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
@@ -29,7 +25,7 @@ function App() {
             <Route path="/download" element={<SignupPage />} />
             <Route path="/help" element={<SignupPage />} />
           </Route>
-          <Route element={user ? <AppLayout /> : <Navigate to="/login" />}>
+          <Route element={<AppLayout />}>
             <Route path="/app/home" element={<AppPage />} />
             <Route path="/app/tasks" element={<TaskPage />} />
             <Route path="/app/calendar" element={<PlaceholderPage />} />

@@ -6,7 +6,7 @@ import { config } from "dotenv";
 config();
 
 import taskRoutes from "./routes/tasks";
-import userRoutes from "./routes/user";
+// import userRoutes from "./routes/user";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -20,7 +20,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use("/api/tasks", taskRoutes);
-app.use("/api/user", userRoutes);
+// app.use("/api/user", userRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

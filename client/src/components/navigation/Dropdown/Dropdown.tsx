@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
 import styles from "./Dropdown.module.css";
-import { useLogout } from "../../../hooks/useLogout";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+// import { useLogout } from "../../../hooks/useLogout";s
 
 interface DropdownProps {
   isVisible: boolean;
 }
 
 const Dropdown = ({ isVisible }: DropdownProps) => {
-  const { logout } = useLogout();
-  const { user } = useAuthContext();
+  // const { logout } = useLogout();
+  // const { user } = useAuthContext();
 
   const handleClick = () => {
-    logout();
+    // logout();
   };
 
   return (
@@ -26,7 +25,8 @@ const Dropdown = ({ isVisible }: DropdownProps) => {
             <span>
               Samuel Johnston{/* <%= user.firstName + ' ' + user.lastName %> */}
             </span>
-            <span>{user && user.email}</span>
+            {/* <span>{user && user.email}</span> */}
+            email
           </div>
         </div>
         <Link to="">Switch Accounts</Link>
