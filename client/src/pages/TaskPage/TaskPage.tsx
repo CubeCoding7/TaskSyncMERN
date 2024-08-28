@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TaskNav from "../../components/TaskPage/TaskNav";
 import styles from "./TaskPage.module.css";
 import { TaskCategory } from "./types";
-import Task from "../../components/TaskPage/Task";
+import Task from "../../components/TaskPage/components/Task";
 import NewTaskForm from "../../components/TaskPage/NewTaskForm";
 import { useTasksContext } from "../../hooks/useTasksContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -61,9 +61,6 @@ function TaskPage() {
         {activeCategory === "one_day" && <h2>One Day</h2>}
         {activeCategory === "completed" && <h2>Completed</h2>}
         <div className={styles.tasks}>
-          {/* <ul>
-            <Task name="Cool" dueDate={new Date(2024, 7, 20)} />
-          </ul> */}
           {Array.isArray(state.tasks) &&
             state.tasks.map((task) => <Task key={task._id} task={task} />)}
         </div>

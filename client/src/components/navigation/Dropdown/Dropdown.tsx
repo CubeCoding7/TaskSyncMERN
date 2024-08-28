@@ -26,10 +26,7 @@ const Dropdown = ({ isVisible }: DropdownProps) => {
             <span>
               Samuel Johnston{/* <%= user.firstName + ' ' + user.lastName %> */}
             </span>
-            <span>
-              {user && user.email}
-              {/* <%= user.email %> */}
-            </span>
+            <span>{user && user.email}</span>
           </div>
         </div>
         <Link to="">Switch Accounts</Link>

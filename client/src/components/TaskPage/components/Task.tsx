@@ -30,10 +30,6 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   };
   return (
     <div className={styles.task}>
-      {/* <form action="/app/tasks/toggle" method="POST">
-        <input type="hidden" name="taskId" />
-        <input type="checkbox" name="completed" />
-      </form> */}
       <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
       <p>{task.name}</p>
       <p className={styles.dueDate}>

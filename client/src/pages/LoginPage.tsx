@@ -30,7 +30,6 @@ const Login: React.FC = () => {
         value={email}
         className={styles.input}
       />
-      {/* <div className="email error"></div> */}
       <label className={styles.label} htmlFor="password">
         Password
       </label>
@@ -42,7 +41,6 @@ const Login: React.FC = () => {
         value={password}
         className={styles.input}
       />
-      {/* <div className="password error"></div> */}
       <button className={styles.button} disabled={isLoading === true}>
         Log in
       </button>
