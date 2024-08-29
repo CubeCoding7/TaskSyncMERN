@@ -9,6 +9,7 @@ import AppPage from "./pages/AppPage";
 import AppLayout from "./AppLayout";
 import PlaceholderPage from "./pages/PlaceHolderPage";
 import TaskPage from "./pages/TaskPage";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   // const { user } = useAuthContext();
@@ -24,6 +25,7 @@ function App() {
             <Route path="/features" element={<LoginPage />} />
             <Route path="/download" element={<SignupPage />} />
             <Route path="/help" element={<SignupPage />} />
+            <Route path="/password/forgot" element={<ForgotPassword />} />
           </Route>
           <Route element={<AppLayout />}>
             <Route path="/app/home" element={<AppPage />} />

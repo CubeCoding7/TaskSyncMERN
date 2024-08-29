@@ -5,7 +5,9 @@ function HomeLayout() {
   return (
     <div className="App">
       <HomeHeader />
-      <Outlet />
+      <div style={{ marginTop: "60px" }}>
+        <Outlet />
+      </div>
     </div>
   );
 }
