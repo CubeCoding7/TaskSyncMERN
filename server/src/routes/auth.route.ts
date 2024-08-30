@@ -1,14 +1,19 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
-  loginHandler,
-  logoutHandler,
-  registerHandler,
-} from "../controllers/auth.controller";
+	loginHandler,
+	logoutHandler,
+	refreshHandler,
+	registerHandler,
+	verifyEmailHandler,
+} from '../controllers/auth.controller';
+import { verifyToken } from '../utils/jwt';
 
 const authRoutes = Router();
 
-authRoutes.post("/register", registerHandler);
-authRoutes.post("/login", loginHandler);
-authRoutes.get("/logout", logoutHandler);
+authRoutes.post('/register', registerHandler);
+authRoutes.post('/login', loginHandler);
+authRoutes.get('/refresh', refreshHandler);
+authRoutes.get('/logout', logoutHandler);
+authRoutes.get('/email/verify/:code', verifyEmailHandler);
 
 export default authRoutes;
