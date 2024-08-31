@@ -1,8 +1,8 @@
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 
 export const hashValue = async (value: string, saltRounds?: number) =>
-  bcrypt.hash(value, saltRounds || 10);
+	bcrypt.hash(value, saltRounds || 10);
 
 export const comparedValue = async (value: string, hashedValue: string) => {
-  bcrypt.compare(value, hashedValue).catch(() => false);
+	bcrypt.compare(value, hashedValue).catch(() => false);
 };

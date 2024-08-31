@@ -3,6 +3,8 @@ import {
 	createAccount,
 	loginUser,
 	refreshUserAccessToken,
+	resetPassword,
+	sendPasswordResetEmail,
 	verifyEmail,
 } from '../services/auth.service';
 import { CREATED, OK, UNAUTHORIZED } from '../constants/http';
@@ -15,7 +17,9 @@ import {
 import {
 	loginSchema,
 	registerSchema,
-	VerificationCodeSchema,
+	emailSchema,
+	resetPasswordSchema,
+	verificationCodeSchema,
 } from './auth.schemas';
 import { verifyToken } from '../utils/jwt';
 import SessionModel from '../models/session.model';
@@ -37,12 +41,11 @@ export const loginHandler = catchErrors(async (req, res) => {
 		...req.body,
 		userAgent: req.headers['user-agent'],
 	});
-
 	const { accessToken, refreshToken } = await loginUser(request);
 
-	return setAuthCookies({ res, accessToken, refreshToken }).status(OK).json({
-		message: 'Login successful',
-	});
+	return setAuthCookies({ res, accessToken, refreshToken })
+		.status(OK)
+		.json({ message: 'Login successful' });
 });
 
 export const logoutHandler = catchErrors(async (req, res) => {
@@ -79,11 +82,27 @@ export const refreshHandler = catchErrors(async (req, res) => {
 });
 
 export const verifyEmailHandler = catchErrors(async (req, res) => {
-	const verificationCode = VerificationCodeSchema.parse(req.params.code);
+	const verificationCode = verificationCodeSchema.parse(req.params.code);
 
 	await verifyEmail(verificationCode);
 
-	return res.status(OK).json({
-		message: 'Email was successfully verified',
-	});
+	return res.status(OK).json({ message: 'Email was successfully verified' });
+});
+
+export const sendPasswordResetHandler = catchErrors(async (req, res) => {
+	const email = emailSchema.parse(req.body.email);
+
+	await sendPasswordResetEmail(email);
+
+	return res.status(OK).json({ message: 'Password reset email sent' });
+});
+
+export const resetPasswordHandler = catchErrors(async (req, res) => {
+	const request = resetPasswordSchema.parse(req.body);
+
+	await resetPassword(request);
+
+	return clearAuthCookies(res)
+		.status(OK)
+		.json({ message: 'Password was reset successfully' });
 });
