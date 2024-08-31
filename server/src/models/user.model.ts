@@ -1,7 +1,5 @@
-import bcrypt, { compare } from 'bcrypt';
 import mongoose from 'mongoose';
-import { boolean } from 'zod';
-import { comparedValue, hashValue } from '../utils/bcrypt';
+import { compareValue, hashValue } from '../utils/bcrypt';
 
 export interface UserDocument extends mongoose.Document {
 	email: string;
@@ -12,28 +10,19 @@ export interface UserDocument extends mongoose.Document {
 	comparePassword(val: string): Promise<boolean>;
 	omitPassword(): Pick<
 		UserDocument,
-		'_id' | 'email' | 'verified' | 'createdAt' | '__v'
+		'_id' | 'email' | 'verified' | 'createdAt' | 'updatedAt' | '__v'
 	>;
 }
 
 const userSchema = new mongoose.Schema<UserDocument>(
 	{
-		email: {
-			type: String,
-			unique: true,
-			required: true,
-		},
-		password: {
-			type: String,
-			required: true,
-		},
-		verified: {
-			type: Boolean,
-			required: true,
-			default: false,
-		},
+		email: { type: String, required: true, unique: true },
+		password: { type: String, required: true },
+		verified: { type: Boolean, required: true, default: false },
 	},
-	{ timestamps: true }
+	{
+		timestamps: true,
+	}
 );
 
 userSchema.pre('save', async function (next) {
@@ -46,7 +35,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.comparePassword = async function (val: string) {
-	return comparedValue(val, this.password);
+	return compareValue(val, this.password);
 };
 
 userSchema.methods.omitPassword = function () {
@@ -56,5 +45,4 @@ userSchema.methods.omitPassword = function () {
 };
 
 const UserModel = mongoose.model<UserDocument>('User', userSchema);
-
 export default UserModel;

@@ -89,15 +89,18 @@ type LoginParams = {
 	password: string;
 	userAgent?: string;
 };
+
 export const loginUser = async ({
 	email,
 	password,
 	userAgent,
 }: LoginParams) => {
 	const user = await UserModel.findOne({ email });
-	appAssert(user, UNAUTHORIZED, 'Invalid email or password');
+	appAssert(user, UNAUTHORIZED, 'Invalid email or password 2');
 
+	console.log(password);
 	const isValid = await user.comparePassword(password);
+	console.log(isValid);
 	appAssert(isValid, UNAUTHORIZED, 'Invalid email or password');
 
 	const userId = user._id;
