@@ -9,6 +9,7 @@ import taskRoutes from './routes/tasks';
 import errorHandler from './middleware/errorHandler';
 import authRoutes from './routes/auth.route';
 import authenticate from './middleware/authenticate';
+import userRoutes from './routes/user.route';
 
 const app = express();
 
