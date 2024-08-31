@@ -8,6 +8,7 @@ import { APP_ORIGIN, PORT } from './constants/env';
 import taskRoutes from './routes/tasks';
 import errorHandler from './middleware/errorHandler';
 import authRoutes from './routes/auth.route';
+import authenticate from './middleware/authenticate';
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api/tasks', taskRoutes);
 app.use('/auth', authRoutes);
+
+app.use('/user', authenticate, userRoutes);
 
 app.use(errorHandler);
 
