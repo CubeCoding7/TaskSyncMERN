@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import styles from './HomeHeader.module.css';
+// import useAuth from '../../hooks/useAuth';
 
 function HomeHeader() {
+	// const { user } = useAuth();
+
 	return (
 		<header className={styles.header}>
 			<div className={styles.logo}>

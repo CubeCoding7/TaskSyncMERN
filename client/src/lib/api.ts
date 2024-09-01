@@ -1,6 +1,5 @@
 import API from '../config/apiClient';
 
-// Define interfaces based on your API responses
 interface LoginResponse {
 	token: string;
 	user: User;
@@ -24,7 +23,7 @@ interface ResetPasswordResponse {
 
 export interface User {
 	id: string;
-	name: string;
+	username: string;
 	email: string;
 }
 
@@ -34,7 +33,6 @@ interface Session {
 	expiresAt: string;
 }
 
-// Define interfaces for request data
 interface LoginData {
 	email: string;
 	password: string;
@@ -42,6 +40,7 @@ interface LoginData {
 
 interface RegisterData {
 	email: string;
+	username: string;
 	password: string;
 	confirmPassword: string;
 }
@@ -51,7 +50,6 @@ interface ResetPasswordData {
 	password: string;
 }
 
-// Function signatures with specific return types
 export const login = async (data: LoginData): Promise<LoginResponse> => {
 	return API.post('/auth/login', data);
 };

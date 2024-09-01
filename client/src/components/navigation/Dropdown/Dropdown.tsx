@@ -12,16 +12,14 @@ interface DropdownProps {
 const Dropdown = ({ isVisible }: DropdownProps) => {
 	const { user } = useAuth();
 	const email = user?.email;
+	const username = user?.username;
 	const navigate = useNavigate();
 
 	const { mutate: signOut } = useMutation({
 		mutationFn: logout,
 		onSettled: () => {
 			queryClient.clear();
-			navigate('/login', {
-				replace: true,
-				state: { redirectUrl: '/tasks/home' },
-			});
+			navigate('/login', { replace: true });
 		},
 	});
 
@@ -38,7 +36,8 @@ const Dropdown = ({ isVisible }: DropdownProps) => {
 					<img src="/img/logo.svg" alt="" />
 					<div className={styles.profileDetails}>
 						<span>
-							Samuel Johnston{/* <%= user.firstName + ' ' + user.lastName %> */}
+							{username}
+							{/* <%= user.firstName + ' ' + user.lastName %> */}
 						</span>
 						<span>{email}</span>
 					</div>

@@ -7,6 +7,7 @@ import { register } from '../lib/api';
 const Register: React.FC = () => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -39,6 +40,15 @@ const Register: React.FC = () => {
 				autoFocus
 				className={styles.input}
 			/>
+			<label htmlFor="username">Username</label>
+			<input
+				type="name"
+				id="username"
+				value={username}
+				onChange={(e) => setUsername(e.target.value)}
+				autoFocus
+				className={styles.input}
+			/>
 			<label className={styles.label} htmlFor="password">
 				Password
 			</label>
@@ -59,7 +69,7 @@ const Register: React.FC = () => {
 				onChange={(e) => setConfirmPassword(e.target.value)}
 				onKeyDown={(e) =>
 					e.key === 'Enter' &&
-					createAccount({ email, password, confirmPassword })
+					createAccount({ email, username, password, confirmPassword })
 				}
 				className={styles.input}
 			/>
@@ -67,8 +77,15 @@ const Register: React.FC = () => {
 
 			<button
 				type="button"
-				disabled={!email || password.length < 6 || password !== confirmPassword}
-				onClick={() => createAccount({ email, password, confirmPassword })}
+				disabled={
+					!email ||
+					!username ||
+					password.length < 6 ||
+					password !== confirmPassword
+				}
+				onClick={() =>
+					createAccount({ email, username, password, confirmPassword })
+				}
 				className={styles.button}
 			>
 				{isPending ? <div className={styles.spinner}></div> : 'Register'}

@@ -1,110 +1,110 @@
 .header {
-  top: 0;
-  position: fixed;
-  width: 1200px;
-  height: 60px;
-  margin: 0 auto;
-  padding: 10px;
-  overflow: hidden;
-  left: 50%;
-  transform: translateX(-50%);
+	top: 0;
+	position: fixed;
+	width: 1200px;
+	height: 60px;
+	margin: 0 auto;
+	padding: 10px;
+	overflow: hidden;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .logo img {
-  float: left;
-  height: 60px;
-  margin-top: -3px;
-  margin-right: 7px;
+	float: left;
+	height: 60px;
+	margin-top: -3px;
+	margin-right: 7px;
 }
 
 .title a {
-  text-decoration: none;
-  float: left;
-  font-size: 35px;
-  color: inherit;
-  background: var(--background-gradient-deg);
-  background-clip: text;
+	text-decoration: none;
+	float: left;
+	font-size: 35px;
+	color: inherit;
+	background: var(--background-gradient-deg);
+	background-clip: text;
 }
 
 .nav_button,
 .sign_up_button {
-  float: right;
-  text-decoration: none;
-  color: var(--text-color);
-  padding: 16px 15px;
-  margin: 0 6px;
-  font-size: 17px;
+	float: right;
+	text-decoration: none;
+	color: var(--text-color);
+	padding: 16px 15px;
+	margin: 0 6px;
+	font-size: 17px;
 }
 
 .sign_up_button {
-  background-image: var(--background-gradient-deg);
-  border-radius: 10px;
-  background-color: var(--text-color);
-  color: var(--text-color);
-  padding: 8px 15px;
-  margin-top: 8px;
-  margin-left: -5px;
+	background-image: var(--background-gradient-deg);
+	border-radius: 10px;
+	background-color: var(--text-color);
+	color: var(--text-color);
+	padding: 8px 15px;
+	margin-top: 8px;
+	margin-left: -5px;
 }
 
 .sign_up_button:hover {
-  border: 2px solid var(--text-color);
-  padding: 6px 13px 6px 13px;
+	border: 2px solid var(--text-color);
+	padding: 6px 13px 6px 13px;
 }
 
 .headerDivider {
-  float: right;
-  border-left: 1px solid var(--text-color);
-  height: 24px;
-  width: 0;
-  margin-top: 14px;
+	float: right;
+	border-left: 1px solid var(--text-color);
+	height: 24px;
+	width: 0;
+	margin-top: 18px;
 }
 
 .main-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
 }
 
 .form {
-  width: 360px;
-  margin: 0 auto;
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  padding: 30px;
-  background: white;
+	width: 360px;
+	margin: 0 auto;
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	padding: 30px;
+	background: white;
 }
 
 .formInput {
-  padding: 10px 12px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  font-size: 1em;
-  width: 93%;
+	padding: 10px 12px;
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	font-size: 1em;
+	width: 93%;
 }
 
 .formLabel {
-  display: block;
-  margin: 20px 0 10px;
+	display: block;
+	margin: 20px 0 10px;
 }
 
 .formButton {
-  margin-top: 30px;
-  border-radius: 36px;
-  background-image: var(--background-gradient-deg);
-  border: 0;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.8em;
-  display: block;
-  padding: 10px 16px;
-  letter-spacing: 2px;
+	margin-top: 30px;
+	border-radius: 36px;
+	background-image: var(--background-gradient-deg);
+	border: 0;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 0.8em;
+	display: block;
+	padding: 10px 16px;
+	letter-spacing: 2px;
 }
 
 .error {
-  color: #ff0099;
-  margin: 10px 2px;
-  font-size: 0.8em;
-  font-weight: bold;
+	color: #ff0099;
+	margin: 10px 2px;
+	font-size: 0.8em;
+	font-weight: bold;
 }

@@ -2,12 +2,13 @@
 import { useState } from 'react';
 import styles from './auth.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { login } from '../lib/api';
 
 const Login: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const queryClient = useQueryClient(); // Create a query client instance
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const redirectUrl = location.state?.redirectUrl || '/app/home';
@@ -19,9 +20,10 @@ const Login: React.FC = () => {
 	} = useMutation({
 		mutationFn: login,
 		onSuccess: () => {
-			navigate(redirectUrl, {
-				replace: true,
-			});
+			// setTimeout(() => {
+			queryClient.invalidateQueries({ queryKey: ['auth'] });
+			navigate(redirectUrl, { replace: true });
+			// }, 9000); // Adjust delay as needed
 		},
 		onError: (error) => {
 			console.error('Login failed: ', error);
