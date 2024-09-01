@@ -36,7 +36,8 @@ function App() {
 					<Route path="/app/tasks" element={<TaskPage />} />
 					<Route path="/app/calendar" element={<PlaceholderPage />} />
 					<Route path="/app/notes" element={<PlaceholderPage />} />
-					<Route path="/app/settings" element={<PlaceholderPage />} />
+					<Route path="/app/account/settings" element={<PlaceholderPage />} />
+					<Route path="/app/account/profile" element={<PlaceholderPage />} />
 				</Route>
 			</Routes>
 		</div>

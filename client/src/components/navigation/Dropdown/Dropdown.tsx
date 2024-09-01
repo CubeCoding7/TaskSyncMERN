@@ -47,8 +47,8 @@ const Dropdown = ({ isVisible }: DropdownProps) => {
 			</div>
 			<div className={styles.sectionDivider}></div>
 			<div>
-				<Link to="/app/profile">Profile and Appearance</Link>
-				<Link to="/app/settings">Settings</Link>
+				<Link to="/app/account/profile">Profile and Appearance</Link>
+				<Link to="/app/account/settings">Settings</Link>
 				<Link to="/app">Device theme</Link>
 				<Link to="/app">Placeholder</Link>
 				<Link to="/app">Placeholder</Link>

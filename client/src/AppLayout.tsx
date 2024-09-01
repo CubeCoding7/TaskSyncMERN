@@ -4,9 +4,12 @@ import Sidebar from './components/navigation/SideBar';
 import AppHeader from './components/navigation/AppHeader';
 import styles from './AppLayout.module.css';
 import useAuth from './hooks/useAuth';
+import { useIsPathExcluded } from './lib/pathUtils';
 
 const AppLayout: React.FC = () => {
 	const { user, isLoading } = useAuth();
+
+	const isExcluded = useIsPathExcluded();
 
 	return isLoading ? (
 		<div style={{ margin: '0 auto' }}>
@@ -14,9 +17,14 @@ const AppLayout: React.FC = () => {
 		</div>
 	) : user ? (
 		<div className={styles.appContainer}>
-			<Sidebar />
+			{!isExcluded && <Sidebar />}
 			<AppHeader />
-			<div className={styles.mainContent}>
+			<div
+				className={styles.mainContent}
+				style={{
+					marginLeft: isExcluded ? '0px' : '80px',
+				}}
+			>
 				<div className={styles.background}></div>
 				<Outlet />
 			</div>
