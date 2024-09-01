@@ -1,6 +1,7 @@
 import catchErrors from '../utils/catchErrors';
 import {
 	createAccount,
+	LoginParams,
 	loginUser,
 	refreshUserAccessToken,
 	resetPassword,
@@ -37,10 +38,18 @@ export const registerHandler = catchErrors(async (req, res) => {
 });
 
 export const loginHandler = catchErrors(async (req, res) => {
-	const request = loginSchema.parse({
+	const parsedRequest = loginSchema.parse({
 		...req.body,
 		userAgent: req.headers['user-agent'],
 	});
+
+	const request: LoginParams = {
+		password: parsedRequest.password,
+		...(parsedRequest.email ? { email: parsedRequest.email } : {}),
+		...(parsedRequest.username ? { username: parsedRequest.username } : {}),
+		userAgent: parsedRequest.userAgent,
+	};
+
 	const { accessToken, refreshToken } = await loginUser(request);
 
 	return setAuthCookies({ res, accessToken, refreshToken })
