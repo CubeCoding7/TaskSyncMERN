@@ -1,58 +1,73 @@
 :root {
-  --text-color: #2d2d2d;
-  --main-color: #d9d9d9;
-  --alt-color: #a4a4a4;
-  --gray-alt-color: gray;
+	--text-color: #2d2d2d;
+	--main-color: #d9d9d9;
+	--alt-color: #a4a4a4;
+	--gray-alt-color: gray;
 
-  --icon-color: #2d2d2d;
+	--icon-color: #2d2d2d;
 
-  --opacity-white: rgba(255, 255, 255, 0.4);
-  --opacity-black: rgba(0, 0, 0, 0.4);
-  --opacity-text: rgba(45, 45, 45, 0.4);
-  --opacity-main: rgba(217, 217, 217, 0.4);
+	--opacity-white: rgba(255, 255, 255, 0.4);
+	--opacity-black: rgba(0, 0, 0, 0.4);
+	--opacity-text: rgba(45, 45, 45, 0.4);
+	--opacity-main: rgba(217, 217, 217, 0.4);
 
-  --first-color: 0, 4, 255;
-  --second-color: 0, 199, 123;
-  --first-color-opacity: rgba(var(--first-color), 0.6);
-  --second-color-opacity: rgba(var(--second-color), 0.6);
+	--first-color: 0, 4, 255;
+	--second-color: 0, 199, 123;
+	--first-color-opacity: rgba(var(--first-color), 0.6);
+	--second-color-opacity: rgba(var(--second-color), 0.6);
 
-  --background-gradient: linear-gradient(
-    rgb(var(--first-color)),
-    rgb(var(--second-color))
-  );
-  --background-gradient-deg: linear-gradient(
-    300deg,
-    rgb(var(--first-color)),
-    rgb(var(--second-color)) 65%
-  );
-  --background-gradient-faded: linear-gradient(
-    to bottom,
-    var(--first-color-opacity),
-    var(--second-color-opacity)
-  );
+	--background-gradient: linear-gradient(
+		rgb(var(--first-color)),
+		rgb(var(--second-color))
+	);
+	--background-gradient-deg: linear-gradient(
+		300deg,
+		rgb(var(--first-color)),
+		rgb(var(--second-color)) 65%
+	);
+	--background-gradient-faded: linear-gradient(
+		to bottom,
+		var(--first-color-opacity),
+		var(--second-color-opacity)
+	);
 
-  color: #0004ff;
-  color: var(--text-color);
+	color: #0004ff;
+	color: var(--text-color);
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  margin: 0;
-  height: 100vh;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 700;
+	margin: 0;
+	height: 100vh;
 }
 
 h1,
 h2,
 p {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .content {
-  height: 100vh;
-  margin: 49px 0 0 0;
-  margin-left: 85px;
-  left: 85px;
-  background-size: 100% 100%;
+	height: 100vh;
+	margin: 49px 0 0 0;
+	margin-left: 85px;
+	left: 85px;
+	background-size: 100% 100%;
+}
+
+.spinner {
+	border: 4px solid rgba(0, 0, 0, 0.1);
+	border-left-color: #000;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
 }

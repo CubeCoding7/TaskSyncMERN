@@ -1,40 +1,44 @@
-import express, { Request, Response, NextFunction } from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import { config } from "dotenv";
-
-config();
-
-import taskRoutes from "./routes/tasks";
-import userRoutes from "./routes/user";
+import 'dotenv/config';
+import express, { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import connectToDatabase from './config/db';
+import { APP_ORIGIN, PORT } from './constants/env';
+import taskRoutes from './routes/tasks';
+import errorHandler from './middleware/errorHandler';
+import authRoutes from './routes/auth.route';
+import authenticate from './middleware/authenticate';
+import userRoutes from './routes/user.route';
+import sessionRoutes from './routes/session.route';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+	cors({
+		origin: APP_ORIGIN,
+		credentials: true,
+	})
+);
+app.use(cookieParser());
 
 app.use((req: Request, res: Response, next: NextFunction) => {
-  console.log(req.path, req.method);
-  next();
+	console.log(req.path, req.method);
+	next();
 });
 
-app.use("/api/tasks", taskRoutes);
-app.use("/api/user", userRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/auth', authRoutes);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).send("Something went wrong!");
+app.use('/user', authenticate, userRoutes);
+app.use('/sessions', authenticate, sessionRoutes);
+
+app.use(errorHandler);
+
+app.listen(PORT, async () => {
+	console.log(`Server running on port ${PORT}`);
+
+	await connectToDatabase();
 });
-
-mongoose
-  .connect(process.env.MONGO_URI!)
-  .then(() => {
-    console.log(`MongoDB connected`);
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
