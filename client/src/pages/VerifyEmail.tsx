@@ -4,10 +4,29 @@ import { verifyEmail } from '../lib/api';
 
 const VerifyEmail = () => {
 	const { code } = useParams();
+
 	const { isPending, isSuccess, isError } = useQuery({
 		queryKey: ['emailVerification', code],
-		queryFn: () => verifyEmail(code),
+		queryFn: () => verifyEmail(code || ''),
+		enabled: !!code, // Only run the query if code is defined
 	});
+
+	if (!code) {
+		return (
+			<div style={{ textAlign: 'center', marginTop: '3rem' }}>
+				<p style={{ color: '#6c757d' }}>
+					The link is either invalid or expired.{' '}
+					<Link
+						to="/password/forgot"
+						replace
+						style={{ color: '#007bff', textDecoration: 'none' }}
+					>
+						Get a new link
+					</Link>
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<div

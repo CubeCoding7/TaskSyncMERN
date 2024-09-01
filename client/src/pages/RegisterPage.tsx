@@ -13,6 +13,7 @@ const Register: React.FC = () => {
 	const {
 		mutate: createAccount,
 		isPending,
+		isError,
 		error,
 	} = useMutation({
 		mutationFn: register,
@@ -22,7 +23,7 @@ const Register: React.FC = () => {
 			});
 		},
 		onError: (error) => {
-			console.error('Login failed: ', error);
+			console.error('Registration failed: ', error);
 		},
 	});
 
@@ -57,18 +58,20 @@ const Register: React.FC = () => {
 				value={confirmPassword}
 				onChange={(e) => setConfirmPassword(e.target.value)}
 				onKeyDown={(e) =>
-					e.key === 'Enter' && register({ email, password, confirmPassword })
+					e.key === 'Enter' &&
+					createAccount({ email, password, confirmPassword })
 				}
 				className={styles.input}
 			/>
-			{error?.message || 'an error occurred'}
+			{isError && <p>{error?.message || 'An error occurred'}</p>}
+
 			<button
 				type="button"
 				disabled={!email || password.length < 6 || password !== confirmPassword}
 				onClick={() => createAccount({ email, password, confirmPassword })}
 				className={styles.button}
 			>
-				{isPending ? <div className={styles.spinner}></div> : 'Log In'}
+				{isPending ? <div className={styles.spinner}></div> : 'Register'}
 			</button>
 			<p>
 				Already have an account?{' '}

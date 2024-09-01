@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 // pages
 import HomeLayout from './HomeLayout';
@@ -11,10 +11,12 @@ import PlaceholderPage from './pages/PlaceHolderPage';
 import TaskPage from './pages/TaskPage';
 import ForgotPassword from './pages/ForgotPassword';
 import VerifyEmail from './pages/VerifyEmail';
+import ResetPassword from './pages/ResetPassword';
+import { setNavigate } from './lib/navigation';
 
 function App() {
-	// const { user } = useAuthContext();
-
+	const navigate = useNavigate();
+	setNavigate(navigate);
 	return (
 		<div className="App">
 			<Routes>
@@ -22,11 +24,12 @@ function App() {
 					<Route index element={<HomePage />} />
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/register" element={<RegisterPage />} />
-					<Route path="/features" element={<LoginPage />} />
+					<Route path="/features" element={<PlaceholderPage />} />
 					<Route path="/download" element={<PlaceholderPage />} />
 					<Route path="/help" element={<PlaceholderPage />} />
-					<Route path="/password/forgot" element={<ForgotPassword />} />
 					<Route path="/email/verify/:code" element={<VerifyEmail />} />
+					<Route path="/password/forgot" element={<ForgotPassword />} />
+					<Route path="/password/reset" element={<ResetPassword />} />
 				</Route>
 				<Route element={<AppLayout />}>
 					<Route path="/app/home" element={<AppPage />} />
