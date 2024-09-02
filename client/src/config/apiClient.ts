@@ -9,6 +9,9 @@ const options = {
 
 const API = axios.create(options);
 
+const TokenRefreshClient = axios.create(options);
+TokenRefreshClient.interceptors.response.use((response) => response.data);
+
 API.interceptors.response.use(
 	(response) => response.data,
 	async (error) => {
@@ -17,8 +20,8 @@ API.interceptors.response.use(
 
 		if (status === 401 && data?.errorCode === 'InvalidAccessToken') {
 			try {
-				await API.get('/auth/refresh');
-				return API.get(config);
+				await TokenRefreshClient.get('/auth/refresh');
+				return TokenRefreshClient.get(config);
 			} catch (error) {
 				queryClient.clear();
 				navigate('/login', {

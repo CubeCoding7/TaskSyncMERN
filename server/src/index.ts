@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.route';
 import authenticate from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
+import './index.d.ts';
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
-app.use('/api/tasks', taskRoutes);
+app.use('/tasks', taskRoutes);
 app.use('/auth', authRoutes);
 
 app.use('/user', authenticate, userRoutes);
