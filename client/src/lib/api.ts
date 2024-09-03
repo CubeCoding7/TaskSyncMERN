@@ -1,4 +1,5 @@
 import API from '../config/apiClient';
+import { List } from './types';
 
 interface LoginResponse {
 	token: string;
@@ -90,4 +91,27 @@ export const getSessions = async (): Promise<Session[]> => {
 
 export const deleteSession = async (id: string): Promise<void> => {
 	return API.delete(`/sessions/${id}`);
+};
+
+export const getLists = async (): Promise<List[]> => {
+	return API.get('/lists');
+};
+
+export const getList = async (id: string): Promise<List> => {
+	return API.get(`/lists/${id}`);
+};
+
+export const createList = async (data: { name: string }): Promise<List> => {
+	return API.post('/lists', data);
+};
+
+export const updateList = async (
+	id: string,
+	updates: Partial<{ name: string }>
+): Promise<List> => {
+	return API.put(`/lists/${id}`, updates);
+};
+
+export const deleteList = async (id: string): Promise<void> => {
+	return API.delete(`/lists/${id}`);
 };

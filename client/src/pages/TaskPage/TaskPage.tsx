@@ -1,22 +1,21 @@
 import { useEffect, useState } from 'react';
 import TaskNav from '../../components/TaskPage/TaskNav';
 import styles from './TaskPage.module.css';
-import { TaskCategory } from './types';
 import Task from '../../components/TaskPage/components/Task';
 import NewTaskForm from '../../components/TaskPage/NewTaskForm';
 import { useTasksContext } from '../../hooks/useTasksContext';
 import useAuth from '../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
+import useList from '../../hooks/ListHooks/useList';
 
 function TaskPage() {
-	const [activeCategory, setActiveCategory] = useState<TaskCategory>('inbox');
 	const [isVisible, setVisibility] = useState(false);
-
-	const toggleVisibility = () => setVisibility((prev) => !prev);
+	const { listId } = useParams<{ listId: string }>();
 
 	const { state, dispatch } = useTasksContext();
+	const toggleVisibility = () => setVisibility((prev) => !prev);
+	const { list, isLoading, isError, error } = useList(listId || '');
 	const { user } = useAuth();
-
-	// console.log(user?.email);
 
 	useEffect(() => {
 		const fetchTasks = async () => {
@@ -28,7 +27,7 @@ function TaskPage() {
 			try {
 				const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
 					method: 'GET',
-					credentials: 'include', // Ensures cookies are sent with the request
+					credentials: 'include',
 				});
 
 				if (!response.ok) {
@@ -45,23 +44,30 @@ function TaskPage() {
 		fetchTasks();
 	}, [dispatch, user]);
 
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
+
+	if (isError) {
+		return <div>Error: {error?.message}</div>;
+	}
+
+	if (!list) {
+		return <div>No list found.</div>;
+	}
+
 	return (
 		<div className={styles.taskPage}>
-			<TaskNav
-				activeCategory={activeCategory}
-				setActiveCategory={setActiveCategory}
-				toggleVisibility={toggleVisibility}
-			/>
+			<TaskNav toggleVisibility={toggleVisibility} />
 			<div className={styles.tasksContent}>
-				{activeCategory === 'inbox' && <h2>Inbox</h2>}
-				{activeCategory === 'all' && <h2>All</h2>}
-				{activeCategory === 'today' && <h2>Today</h2>}
-				{activeCategory === 'scheduled' && <h2>Scheduled</h2>}
-				{activeCategory === 'one_day' && <h2>One Day</h2>}
-				{activeCategory === 'completed' && <h2>Completed</h2>}
+				<h2>{}</h2>
 				<div className={styles.tasks}>
 					{Array.isArray(state.tasks) &&
-						state.tasks.map((task) => <Task key={task._id} task={task} />)}
+						state.tasks
+							.filter((task) => {
+								return task.category === list.category;
+							})
+							.map((task) => <Task key={task._id} task={task} />)}
 				</div>
 				{isVisible && <NewTaskForm toggleVisibility={toggleVisibility} />}
 			</div>

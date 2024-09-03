@@ -33,7 +33,7 @@ function App() {
 				</Route>
 				<Route element={<AppLayout />}>
 					<Route path="/app/home" element={<AppPage />} />
-					<Route path="/app/tasks" element={<TaskPage />} />
+					<Route path="/app/tasks/:listId" element={<TaskPage />} />
 					<Route path="/app/calendar" element={<PlaceholderPage />} />
 					<Route path="/app/notes" element={<PlaceholderPage />} />
 					<Route path="/app/account/settings" element={<PlaceholderPage />} />

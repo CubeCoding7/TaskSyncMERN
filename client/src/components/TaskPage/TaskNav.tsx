@@ -1,132 +1,86 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
-  faFolderPlus,
-  faInbox,
-  faRectangleHistoryCirclePlus,
-  faCheck,
-  faCalendarStar,
-  faCalendarClock,
-  faCalendarImage,
-  faSquareCheck,
-} from "@fortawesome/pro-solid-svg-icons";
-import styles from "./TaskNav.module.css";
-
-type TaskCategory =
-  | "inbox"
-  | "all"
-  | "today"
-  | "scheduled"
-  | "one_day"
-  | "completed";
+	faPlus,
+	faFolderPlus,
+	faInbox,
+	faRectangleHistoryCirclePlus,
+	faCheck,
+	faCalendarStar,
+	faCalendarClock,
+	faCalendarImage,
+	faSquareCheck,
+} from '@fortawesome/pro-solid-svg-icons';
+import styles from './TaskNav.module.css';
+import List from './components/List';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import useLists from '../../hooks/ListHooks/useLists';
 
 interface Props {
-  activeCategory: TaskCategory;
-  setActiveCategory: (category: TaskCategory) => void;
-  toggleVisibility: () => void;
+	toggleVisibility: () => void;
 }
 
-const TaskNav = ({
-  activeCategory,
-  setActiveCategory,
-  toggleVisibility,
-}: Props) => {
-  return (
-    <div className={styles.tasksNav}>
-      <ul className={styles.wrapper}>
-        <div className={styles.topBarWrapper}>
-          <ul className={styles.topBar}>
-            <li>
-              <button className={styles.button} onClick={toggleVisibility}>
-                <FontAwesomeIcon className={styles.icon} icon={faPlus} />
-              </button>
-            </li>
-            <li>
-              <button className={styles.button}>
-                <FontAwesomeIcon className={styles.icon} icon={faFolderPlus} />
-              </button>
-            </li>
-            <li>
-              <button className={styles.button} aria-label="Add History">
-                <FontAwesomeIcon
-                  className={styles.icon}
-                  icon={faRectangleHistoryCirclePlus}
-                />
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div className={styles.listWrapper}>
-          <li>
-            <button
-              className={`${styles.navLink} ${
-                activeCategory === "inbox" ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory("inbox")}
-            >
-              <FontAwesomeIcon className={styles.icon} icon={faInbox} />
-              Inbox
-            </button>
-          </li>
-          <li>
-            <button
-              className={`${styles.navLink} ${
-                activeCategory === "all" ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory("all")}
-            >
-              <FontAwesomeIcon className={styles.icon} icon={faCheck} />
-              All
-            </button>
-          </li>
-          <li>
-            <button
-              className={`${styles.navLink} ${
-                activeCategory === "today" ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory("today")}
-            >
-              <FontAwesomeIcon className={styles.icon} icon={faCalendarStar} />
-              Today
-            </button>
-          </li>
-          <li>
-            <button
-              className={`${styles.navLink} ${
-                activeCategory === "scheduled" ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory("scheduled")}
-            >
-              <FontAwesomeIcon className={styles.icon} icon={faCalendarClock} />
-              Scheduled
-            </button>
-          </li>
-          <li>
-            <button
-              className={`${styles.navLink} ${
-                activeCategory === "one_day" ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory("one_day")}
-            >
-              <FontAwesomeIcon className={styles.icon} icon={faCalendarImage} />
-              One Day
-            </button>
-          </li>
-          <li>
-            <button
-              className={`${styles.navLink} ${
-                activeCategory === "completed" ? styles.active : ""
-              }`}
-              onClick={() => setActiveCategory("completed")}
-            >
-              <FontAwesomeIcon className={styles.icon} icon={faSquareCheck} />
-              Completed
-            </button>
-          </li>
-        </div>
-      </ul>
-    </div>
-  );
+const TaskNav = ({ toggleVisibility }: Props) => {
+	const { lists } = useLists();
+
+	const categories: { name: string; icon: IconProp; category: string }[] = [
+		{ name: 'Inbox', icon: faInbox, category: 'inbox' },
+		{ name: 'All', icon: faCheck, category: 'all' },
+		{ name: 'Today', icon: faCalendarStar, category: 'today' },
+		{ name: 'Scheduled', icon: faCalendarClock, category: 'scheduled' },
+		{ name: 'One Day', icon: faCalendarImage, category: 'one_day' },
+		{ name: 'Completed', icon: faSquareCheck, category: 'completed' },
+	];
+
+	return (
+		<div className={styles.tasksNav}>
+			<ul className={styles.wrapper}>
+				<div className={styles.topBarWrapper}>
+					<ul className={styles.topBar}>
+						<li>
+							<button className={styles.button} onClick={toggleVisibility}>
+								<FontAwesomeIcon className={styles.icon} icon={faPlus} />
+							</button>
+						</li>
+						<li>
+							<button className={styles.button}>
+								<FontAwesomeIcon className={styles.icon} icon={faFolderPlus} />
+							</button>
+						</li>
+						<li>
+							<button className={styles.button} aria-label="Add History">
+								<FontAwesomeIcon
+									className={styles.icon}
+									icon={faRectangleHistoryCirclePlus}
+								/>
+							</button>
+						</li>
+					</ul>
+				</div>
+				<div className={styles.listWrapper}>
+					{/* Render predefined categories */}
+					{categories.map((item) => (
+						<List
+							key={item.category}
+							name={item.name}
+							icon={item.icon}
+							category={item.category}
+						/>
+					))}
+					<div className={styles.userLists}>
+						{/* Render user-created lists */}
+						{lists.map((list) => (
+							<List
+								key={list._id}
+								name={list.name}
+								icon={faCheck}
+								category={list._id}
+							/>
+						))}
+					</div>
+				</div>
+			</ul>
+		</div>
+	);
 };
 
 export default TaskNav;

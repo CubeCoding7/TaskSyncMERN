@@ -8,6 +8,7 @@ interface Task {
 	name: string;
 	description: string;
 	dueDate: Date;
+	category?: string;
 	createdAt: string;
 	completed: boolean;
 }

@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.route';
 import authenticate from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
+import listRoutes from './routes/list.route';
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use('/auth', authRoutes);
 app.use('/tasks', authenticate, taskRoutes);
+app.use('/lists', authenticate, listRoutes);
 app.use('/user', authenticate, userRoutes);
 app.use('/sessions', authenticate, sessionRoutes);
 
