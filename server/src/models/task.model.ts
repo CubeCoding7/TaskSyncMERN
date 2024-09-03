@@ -1,8 +1,16 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
+export interface TaskDocument extends mongoose.Document {
+	name: string;
+	description?: string;
+	dueDate?: Date;
+	user_id: mongoose.Types.ObjectId;
+	completed: boolean;
+	createdAt: Date;
+	updatedAt: Date;
+}
 
-const taskSchema = new Schema(
+const taskSchema = new mongoose.Schema<TaskDocument>(
 	{
 		name: {
 			type: String,
@@ -11,13 +19,23 @@ const taskSchema = new Schema(
 		description: {
 			type: String,
 		},
-		dueDate: { type: Date },
+		dueDate: {
+			type: Date,
+		},
 		user_id: {
-			type: String,
+			type: mongoose.Schema.Types.ObjectId,
 			required: true,
+			ref: 'User',
+		},
+		completed: {
+			type: Boolean,
+			default: false,
 		},
 	},
-	{ timestamps: true }
+	{
+		timestamps: true,
+	}
 );
 
-export default mongoose.model('Task', taskSchema);
+const TaskModel = mongoose.model<TaskDocument>('Task', taskSchema);
+export default TaskModel;

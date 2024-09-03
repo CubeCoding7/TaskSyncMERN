@@ -1,99 +1,89 @@
 import { Request, Response } from 'express';
-import Task from '../models/task.model';
+import { z } from 'zod';
 import mongoose from 'mongoose';
+import Task from '../models/task.model';
+import catchErrors from '../utils/catchErrors';
+import appAssert from '../utils/appAssert';
+import { NOT_FOUND, OK, BAD_REQUEST } from '../constants/http';
+import TaskModel from '../models/task.model';
 
-const getTasks = async (req: Request, res: Response) => {
-	// const user_id = req.user._id;
+// Handler to get all tasks for the user
+export const getTasks = catchErrors(async (req: Request, res: Response) => {
+	const userId = req.userId;
+	const tasks = await Task.find({ user_id: userId }).sort({ createdAt: -1 });
+	return res.status(OK).json(tasks);
+});
 
-	const tasks = await Task.find({}).sort({ createdAt: -1 });
+// Handler to get a single task by ID
+export const getTask = catchErrors(async (req: Request, res: Response) => {
+	const taskId = z.string().parse(req.params.id);
+	appAssert(mongoose.Types.ObjectId.isValid(taskId), NOT_FOUND, 'No such task');
+	const task = await Task.findOne({ _id: taskId, user_id: req.userId });
+	appAssert(task, NOT_FOUND, 'No such task');
+	return res.status(OK).json(task);
+});
 
-	res.status(200).json(tasks);
-};
-
-const getTask = async (req: Request, res: Response) => {
-	const { id } = req.params;
-
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.status(404).json({ error: 'No such task' });
-	}
-
-	const task = await Task.findById(id);
-
-	if (!task) {
-		return res.status(404).json({ error: 'No such task' });
-	}
-
-	res.status(200).json(task);
-};
-
-const createTask = async (req: Request, res: Response) => {
+// Handler to create a new task
+export const createTask = catchErrors(async (req: Request, res: Response) => {
 	const { name, description, dueDate } = req.body;
 
-	const emptyFields: string[] = [];
-
+	// Ensure name is provided
 	if (!name) {
-		emptyFields.push('name');
-	}
-	if (!description) {
-		emptyFields.push('description');
-	}
-	if (!dueDate) {
-		emptyFields.push('dueDate');
-	}
-	if (emptyFields.length! > 3) {
-		return res
-			.status(400)
-			.json({ error: 'Please fill in all the fields', emptyFields });
+		return res.status(BAD_REQUEST).json({
+			error: 'Name is required',
+		});
 	}
 
-	// if (!req.user) {
-	//   return res.status(401).json({ error: "Unauthorized" });
-	// }
+	// Create the task
+	const userId = req.userId;
+	const task = await Task.create({
+		name,
+		description, // Optional
+		dueDate, // Optional
+		user_id: userId, // Correct field name according to schema
+	});
+	return res.status(201).json(task);
+});
 
-	try {
-		// const user_id = req.user._id;
-		const task = await Task.create({ name, description, dueDate });
-		res.status(200).json(task);
-	} catch (err) {
-		res.status(400).json({ error: (err as Error).message });
-	}
-};
+// Handler to delete a task by ID
+export const deleteTask = catchErrors(async (req: Request, res: Response) => {
+	const taskId = z.string().parse(req.params.id);
+	appAssert(mongoose.Types.ObjectId.isValid(taskId), NOT_FOUND, 'No such task');
+	const task = await Task.findOneAndDelete({
+		_id: taskId,
+		user_id: req.userId,
+	});
+	appAssert(task, NOT_FOUND, 'No such task');
+	return res.status(OK).json({ message: 'Task removed' });
+});
 
-const deleteTask = async (req: Request, res: Response) => {
-	const { id } = req.params;
-
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.status(404).json({ error: 'No such task' });
-	}
-
-	const task = await Task.findOneAndDelete({ _id: id });
-
-	if (!task) {
-		return res.status(404).json({ error: 'No such task' });
-	}
-
-	res.status(200).json(task);
-};
-
-const updateTask = async (req: Request, res: Response) => {
-	const { id } = req.params;
-
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.status(404).json({ error: 'No such task' });
-	}
-
+// Handler to update a task by ID
+export const updateTask = catchErrors(async (req: Request, res: Response) => {
+	const taskId = z.string().parse(req.params.id);
+	appAssert(mongoose.Types.ObjectId.isValid(taskId), NOT_FOUND, 'No such task');
 	const task = await Task.findOneAndUpdate(
-		{ _id: id },
-		{
-			...req.body,
-		}
+		{ _id: taskId, user_id: req.userId }, // Ensure task belongs to the user
+		req.body,
+		{ new: true }
+	);
+	appAssert(task, NOT_FOUND, 'No such task');
+	return res.status(OK).json(task);
+});
+
+export const completeTask = catchErrors(async (req: Request, res: Response) => {
+	const taskId = z.string().parse(req.params.id);
+	appAssert(
+		mongoose.Types.ObjectId.isValid(taskId),
+		NOT_FOUND,
+		'Invalid task ID'
 	);
 
-	if (!task) {
-		return res.status(404).json({ error: 'No such task' });
-	}
+	const task = await Task.findOne({ _id: taskId, user_id: req.userId });
+	appAssert(task, NOT_FOUND, 'No such task');
 
-	res.status(200).json(task);
-};
+	// Toggle completion status
+	task.completed = !task.completed;
+	await task.save();
 
-export { getTasks, getTask, createTask, deleteTask, updateTask };
+	return res.status(OK).json(task);
+});

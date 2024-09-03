@@ -5,13 +5,12 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectToDatabase from './config/db';
 import { APP_ORIGIN, PORT } from './constants/env';
-import taskRoutes from './routes/tasks';
+import taskRoutes from './routes/task.route';
 import errorHandler from './middleware/errorHandler';
 import authRoutes from './routes/auth.route';
 import authenticate from './middleware/authenticate';
 import userRoutes from './routes/user.route';
 import sessionRoutes from './routes/session.route';
-import './index.d.ts';
 
 const app = express();
 
@@ -30,9 +29,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
-app.use('/tasks', taskRoutes);
 app.use('/auth', authRoutes);
-
+app.use('/tasks', authenticate, taskRoutes);
 app.use('/user', authenticate, userRoutes);
 app.use('/sessions', authenticate, sessionRoutes);
 
