@@ -1,4 +1,4 @@
-import { State, Action, Task } from '../context/TaskContext';
+import { State, Action, Task } from '../lib/types';
 
 export const tasksReducer = (state: State, action: Action): State => {
 	switch (action.type) {

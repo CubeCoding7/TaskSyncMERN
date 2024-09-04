@@ -2,20 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from './Task.module.css';
 import Checkbox from './Checkbox';
 import { toggleTaskCompletion } from '../../../lib/taskUtils';
-
-interface Task {
-	_id: string;
-	name: string;
-	description: string;
-	dueDate: Date;
-	category?: string;
-	createdAt: string;
-	completed: boolean;
-}
+import type { Task as TaskType } from '../../../lib/types';
 
 interface TaskProps {
-	task: Task;
-	onTaskUpdate: (updatedTask: Task) => void;
+	task: TaskType;
+	onTaskUpdate: (task: TaskType) => void;
 }
 
 const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {

@@ -1,24 +1,6 @@
 import { createContext, useReducer, ReactNode, Dispatch } from 'react';
 import { tasksReducer } from '../reducers/tasksReducer';
-
-export interface Task {
-	_id: string;
-	name: string;
-	description: string;
-	completed: boolean;
-	category?: string;
-	dueDate: Date;
-	createdAt: string;
-}
-
-export interface State {
-	tasks: Task[];
-}
-
-export interface Action {
-	type: 'SET_TASKS' | 'CREATE_TASK' | 'DELETE_TASK' | 'UPDATE_TASK';
-	payload: Task[] | Task;
-}
+import { State, Action } from '../lib/types';
 
 export const TasksContext = createContext<
 	{ state: State; dispatch: Dispatch<Action> } | undefined

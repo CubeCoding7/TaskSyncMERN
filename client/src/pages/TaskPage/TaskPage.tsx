@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
-import TaskNav from '../../components/TaskPage/TaskNav';
-import styles from './TaskPage.module.css';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Task from '../../components/TaskPage/components/Task';
 import NewTaskForm from '../../components/TaskPage/NewTaskForm';
 import { useTasksContext } from '../../hooks/useTasksContext';
 import useAuth from '../../hooks/useAuth';
-import { useParams } from 'react-router-dom';
+import useFetchTasks from '../../hooks/useTask';
 import useList from '../../hooks/ListHooks/useList';
-import API from '../../config/apiClient';
+import { sortTasks } from '../../lib/taskUtils';
+import TaskPageContent from '../../components/TaskPage/TaskPageContent';
+import styles from './TaskPage.module.css';
+import { Task as TaskType } from '../../lib/types';
 
 function TaskPage() {
 	const [isVisible, setVisibility] = useState(false);
@@ -18,103 +20,48 @@ function TaskPage() {
 	const { list, isLoading, isError, error } = useList(listId || '');
 	const { user } = useAuth();
 
-	useEffect(() => {
-		const fetchTasks = async () => {
-			if (!user) {
-				console.error('User is not authenticated');
-				return;
-			}
+	useFetchTasks(user, dispatch);
 
-			try {
-				const response = await API.get<{ tasks: Task[] }>(
-					`${import.meta.env.VITE_API_URL}/tasks`
-				);
-
-				const tasks = response;
-
-				if (!Array.isArray(tasks)) {
-					throw new Error('Invalid tasks format');
-				}
-
-				dispatch({ type: 'SET_TASKS', payload: tasks });
-			} catch (error) {
-				console.error('Failed to fetch tasks:', error);
-			}
-		};
-
-		fetchTasks();
-	}, [dispatch, user]);
-
-	const handleTaskUpdate = (updatedTask: Task) => {
-		dispatch({
-			type: 'UPDATE_TASK',
-			payload: updatedTask,
-		});
+	const handleTaskUpdate = (updatedTask: TaskType) => {
+		dispatch({ type: 'UPDATE_TASK', payload: updatedTask });
 	};
 
 	if (isLoading) {
 		return (
-			<div className={styles.taskPage}>
-				<TaskNav toggleVisibility={toggleVisibility} />
-				<div className={styles.tasksContent}>
-					<div>Loading...</div>
-				</div>
-			</div>
+			<TaskPageContent toggleVisibility={toggleVisibility}>
+				<div>Loading...</div>
+			</TaskPageContent>
 		);
 	}
 
 	if (isError) {
 		return (
-			<div className={styles.taskPage}>
-				<TaskNav toggleVisibility={toggleVisibility} />
-				<div className={styles.tasksContent}>
-					<div>Error: {error?.message}</div>
-				</div>
-			</div>
+			<TaskPageContent toggleVisibility={toggleVisibility}>
+				<div>Error: {error?.message}</div>
+			</TaskPageContent>
 		);
 	}
 
 	if (!list) {
 		return (
-			<div className={styles.taskPage}>
-				<TaskNav toggleVisibility={toggleVisibility} />
-				<div className={styles.tasksContent}>
-					<div>No list found.</div>
-				</div>
-			</div>
+			<TaskPageContent toggleVisibility={toggleVisibility}>
+				<div>No list found.</div>
+			</TaskPageContent>
 		);
 	}
 
-	// Sort tasks: completed tasks at the bottom
-	const sortedTasks = Array.isArray(state.tasks)
-		? state.tasks
-				.filter((task) => {
-					if (list.category === 'completed') {
-						return task.completed;
-					}
-					if (list.category === 'all') {
-						return true;
-					}
-					return task.category === list.category && !task.completed;
-				})
-				.sort((a, b) =>
-					a.completed === b.completed ? 0 : a.completed ? 1 : -1
-				)
-		: [];
+	const sortedTasks = sortTasks(state.tasks, list.category);
 
 	return (
-		<div className={styles.taskPage}>
-			<TaskNav toggleVisibility={toggleVisibility} />
-			<div className={styles.tasksContent}>
-				<h2>{list.name}</h2>
-				<div className={styles.tasks}>
-					{sortedTasks.map((task) => (
-						<Task key={task._id} task={task} onTaskUpdate={handleTaskUpdate} />
-					))}
-				</div>
-				{isVisible && <NewTaskForm toggleVisibility={toggleVisibility} />}
+		<TaskPageContent toggleVisibility={toggleVisibility}>
+			<h2>{list.name}</h2>
+			<div className={styles.tasks}>
+				{sortedTasks.map((task) => (
+					<Task key={task._id} task={task} onTaskUpdate={handleTaskUpdate} />
+				))}
 			</div>
-		</div>
+			{isVisible && <NewTaskForm toggleVisibility={toggleVisibility} />}
+		</TaskPageContent>
 	);
 }
 

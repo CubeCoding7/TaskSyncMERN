@@ -1,5 +1,5 @@
 import API from '../config/apiClient';
-import { List } from './types';
+import { List, User } from './types';
 
 interface LoginResponse {
 	token: string;
@@ -20,13 +20,6 @@ interface SendPasswordResetEmailResponse {
 
 interface ResetPasswordResponse {
 	message: string;
-}
-
-export interface User {
-	id: string;
-	username: string;
-	email: string;
-	token: string;
 }
 
 interface Session {
