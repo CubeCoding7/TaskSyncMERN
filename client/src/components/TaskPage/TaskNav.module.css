@@ -1,87 +1,87 @@
 .tasksNav {
-  width: 230px;
-  position: fixed;
-  height: 100%;
-  border-right: 2px solid var(--text-color);
-  display: flex;
-  flex-direction: column;
+	width: 230px;
+	position: fixed;
+	height: 100%;
+	border-right: 2px solid var(--text-color);
+	display: flex;
+	flex-direction: column;
 }
 
 .wrapper {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-weight: 500;
-  font-size: larger;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-weight: 500;
+	font-size: larger;
 }
 
 .navLink {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  color: var(--text-color);
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  padding: 3px 0px;
-  font-size: inherit;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	color: var(--text-color);
+	text-decoration: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	text-align: left;
+	padding: 3px 0px;
+	font-size: inherit;
 }
 
 .navLink:hover {
-  background-color: var(--opacity-white);
+	background-color: var(--opacity-white);
 }
 
 .navLink:focus {
-  outline: none;
+	outline: none;
 }
 
-.navLink.active {
-  background-color: var(--opacity-white);
+.active {
+	background-color: var(--opacity-white);
 }
 
 .listWrapper li {
-  margin: 15px 5px 0 5px;
-  border-radius: 10px;
+	margin: 15px 5px 0 5px;
+	border-radius: 10px;
 }
 
 .listWrapper .icon {
-  padding-left: 20px;
-  padding-right: 5px;
+	padding-left: 20px;
+	padding-right: 5px;
 }
 
 .topBarWrapper {
-  border-bottom: 2px solid var(--text-color);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 38px;
-  padding: 0 10px;
+	border-bottom: 2px solid var(--text-color);
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 38px;
+	padding: 0 10px;
 }
 
 .topBar {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 .topBar li {
-  margin-left: 15px;
+	margin-left: 15px;
 }
 
 .button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	display: flex;
+	align-items: center;
 }
 
 .icon {
-  font-size: x-large;
-  color: var(--text-color);
+	font-size: x-large;
+	color: var(--text-color);
 }

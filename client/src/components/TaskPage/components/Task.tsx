@@ -15,9 +15,10 @@ interface Task {
 
 interface TaskProps {
 	task: Task;
+	onTaskUpdate: (updatedTask: Task) => void;
 }
 
-const Task: React.FC<TaskProps> = ({ task }) => {
+const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
 	const [isChecked, setIsChecked] = useState(false);
 
 	useEffect(() => {
@@ -32,9 +33,14 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 		return localDate.toLocaleDateString();
 	};
 
-	const handleCheckboxChange = (checked: boolean) => {
+	const handleCheckboxChange = async (checked: boolean) => {
 		setIsChecked(checked);
-		toggleTaskCompletion(task._id);
+		try {
+			const updatedTask = await toggleTaskCompletion(task._id);
+			onTaskUpdate(updatedTask);
+		} catch (error) {
+			console.error('Error updating task completion:', error);
+		}
 	};
 	return (
 		<div className={styles.task}>

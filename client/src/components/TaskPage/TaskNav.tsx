@@ -12,14 +12,22 @@ import {
 } from '@fortawesome/pro-solid-svg-icons';
 import styles from './TaskNav.module.css';
 import List from './components/List';
+import UserList from './components/UserList';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import useLists from '../../hooks/ListHooks/useLists';
+// import { useState } from 'react';
+// import { useParams } from 'react-router-dom';
+// import useList from '../../hooks/ListHooks/useList';
 
 interface Props {
 	toggleVisibility: () => void;
 }
 
 const TaskNav = ({ toggleVisibility }: Props) => {
+	// const { id } = useParams();
+	// const list = useList(id);
+
+	// const [isActive, setIsActive] = useState(false);
 	const { lists } = useLists();
 
 	const categories: { name: string; icon: IconProp; category: string }[] = [
@@ -69,11 +77,12 @@ const TaskNav = ({ toggleVisibility }: Props) => {
 					<div className={styles.userLists}>
 						{/* Render user-created lists */}
 						{lists.map((list) => (
-							<List
+							<UserList
 								key={list._id}
 								name={list.name}
 								icon={faCheck}
 								category={list._id}
+								listId={list._id}
 							/>
 						))}
 					</div>

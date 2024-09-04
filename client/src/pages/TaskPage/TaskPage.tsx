@@ -44,30 +44,72 @@ function TaskPage() {
 		fetchTasks();
 	}, [dispatch, user]);
 
+	const handleTaskUpdate = (updatedTask: Task) => {
+		dispatch({
+			type: 'UPDATE_TASK',
+			payload: updatedTask,
+		});
+	};
+
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return (
+			<div className={styles.taskPage}>
+				<TaskNav toggleVisibility={toggleVisibility} />
+				<div className={styles.tasksContent}>
+					<div>Loading...</div>
+				</div>
+			</div>
+		);
 	}
 
 	if (isError) {
-		return <div>Error: {error?.message}</div>;
+		return (
+			<div className={styles.taskPage}>
+				<TaskNav toggleVisibility={toggleVisibility} />
+				<div className={styles.tasksContent}>
+					<div>Error: {error?.message}</div>
+				</div>
+			</div>
+		);
 	}
 
 	if (!list) {
-		return <div>No list found.</div>;
+		return (
+			<div className={styles.taskPage}>
+				<TaskNav toggleVisibility={toggleVisibility} />
+				<div className={styles.tasksContent}>
+					<div>No list found.</div>
+				</div>
+			</div>
+		);
 	}
+
+	// Sort tasks: completed tasks at the bottom
+	const sortedTasks = Array.isArray(state.tasks)
+		? state.tasks
+				.filter((task) => {
+					if (list.category === 'completed') {
+						return task.completed;
+					}
+					if (list.category === 'all') {
+						return true;
+					}
+					return task.category === list.category && !task.completed;
+				})
+				.sort((a, b) =>
+					a.completed === b.completed ? 0 : a.completed ? 1 : -1
+				)
+		: [];
 
 	return (
 		<div className={styles.taskPage}>
 			<TaskNav toggleVisibility={toggleVisibility} />
 			<div className={styles.tasksContent}>
-				<h2>{}</h2>
+				<h2>{list.name}</h2>
 				<div className={styles.tasks}>
-					{Array.isArray(state.tasks) &&
-						state.tasks
-							.filter((task) => {
-								return task.category === list.category;
-							})
-							.map((task) => <Task key={task._id} task={task} />)}
+					{sortedTasks.map((task) => (
+						<Task key={task._id} task={task} onTaskUpdate={handleTaskUpdate} />
+					))}
 				</div>
 				{isVisible && <NewTaskForm toggleVisibility={toggleVisibility} />}
 			</div>

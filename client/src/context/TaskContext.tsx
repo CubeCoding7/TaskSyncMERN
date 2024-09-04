@@ -16,7 +16,7 @@ export interface State {
 }
 
 export interface Action {
-	type: 'SET_TASKS' | 'CREATE_TASK' | 'DELETE_TASK';
+	type: 'SET_TASKS' | 'CREATE_TASK' | 'DELETE_TASK' | 'UPDATE_TASK';
 	payload: Task[] | Task;
 }
 

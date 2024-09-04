@@ -15,12 +15,36 @@ export const getLists = catchErrors(async (req: Request, res: Response) => {
 
 export const getList = catchErrors(async (req: Request, res: Response) => {
 	const listId = z.string().parse(req.params.id);
-	appAssert(
-		mongoose.Types.ObjectId.isValid(listId),
-		NOT_FOUND,
-		'There is no such list'
-	);
 
+	// Define your custom list IDs
+	const customLists = new Set([
+		'inbox',
+		'all',
+		'today',
+		'scheduled',
+		'one_day',
+		'completed',
+	]);
+
+	// Check if the listId is a valid ObjectId or a custom list
+	if (!mongoose.Types.ObjectId.isValid(listId) && !customLists.has(listId)) {
+		return res.status(NOT_FOUND).json({ message: 'There is no such list' });
+	}
+
+	if (customLists.has(listId)) {
+		const name =
+			listId.replace('_', ' ').charAt(0).toUpperCase() +
+			listId.replace('_', ' ').slice(1).toLowerCase();
+		const customList = {
+			_id: listId,
+			user_id: req.userId,
+			name: name,
+			category: listId,
+		};
+		return res.status(OK).json(customList);
+	}
+
+	// Proceed to check the database for the list if it's not a custom list
 	const list = await List.findOne({ _id: listId, user_id: req.userId });
 	appAssert(list, NOT_FOUND, 'No such list');
 

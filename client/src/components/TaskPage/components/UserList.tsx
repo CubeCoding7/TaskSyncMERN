@@ -1,22 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../TaskNav.module.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	name: string;
 	icon: IconProp;
 	category: string;
+	listId: string;
 }
 
-const List = ({ name, icon, category }: Props) => {
+const List = ({ name, icon, listId }: Props) => {
 	const navigate = useNavigate();
 
 	const handleNavigation = () => {
-		navigate(`/app/tasks/${category}`);
+		navigate(`/app/tasks/${listId}`);
 	};
 
-	const isActive = useLocation().pathname.includes(`/app/tasks/${category}`);
+	const isActive = location.pathname === `/app/tasks/${listId}`;
+
 	return (
 		<li>
 			<button

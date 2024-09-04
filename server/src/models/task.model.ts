@@ -8,6 +8,7 @@ export interface TaskDocument extends mongoose.Document {
 	completed: boolean;
 	createdAt: Date;
 	updatedAt: Date;
+	category: string;
 }
 
 const taskSchema = new mongoose.Schema<TaskDocument>(
@@ -30,6 +31,10 @@ const taskSchema = new mongoose.Schema<TaskDocument>(
 		completed: {
 			type: Boolean,
 			default: false,
+		},
+		category: {
+			type: String,
+			default: 'inbox',
 		},
 	},
 	{
