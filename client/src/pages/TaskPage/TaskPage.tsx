@@ -7,6 +7,7 @@ import { useTasksContext } from '../../hooks/useTasksContext';
 import useAuth from '../../hooks/useAuth';
 import { useParams } from 'react-router-dom';
 import useList from '../../hooks/ListHooks/useList';
+import API from '../../config/apiClient';
 
 function TaskPage() {
 	const [isVisible, setVisibility] = useState(false);
@@ -25,17 +26,17 @@ function TaskPage() {
 			}
 
 			try {
-				const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
-					method: 'GET',
-					credentials: 'include',
-				});
+				const response = await API.get<{ tasks: Task[] }>(
+					`${import.meta.env.VITE_API_URL}/tasks`
+				);
 
-				if (!response.ok) {
-					throw new Error('Failed to fetch tasks');
+				const tasks = response;
+
+				if (!Array.isArray(tasks)) {
+					throw new Error('Invalid tasks format');
 				}
 
-				const json = await response.json();
-				dispatch({ type: 'SET_TASKS', payload: json });
+				dispatch({ type: 'SET_TASKS', payload: tasks });
 			} catch (error) {
 				console.error('Failed to fetch tasks:', error);
 			}
