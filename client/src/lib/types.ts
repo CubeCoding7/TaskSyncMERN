@@ -12,7 +12,7 @@ export type Task = {
 	_id: string;
 	name: string;
 	description?: string;
-	dueDate?: Date | null;
+	dueDate?: Date | string | null | undefined;
 	user_id: string;
 	completed: boolean;
 	category: string;

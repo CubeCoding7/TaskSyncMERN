@@ -1,0 +1,29 @@
+.task {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	cursor: pointer;
+	border-radius: 10px;
+	font-weight: 400;
+	border: 2px solid var(--opacity-black);
+	margin-bottom: 5px;
+}
+
+.task:nth-of-type(6) {
+	margin-bottom: 20px;
+}
+
+.task:hover {
+	background-color: var(--opacity-white);
+}
+
+.dueDate {
+	display: block;
+	font-size: 15px;
+	background-color: var(--opacity-black);
+	justify-content: center;
+	border-radius: 20px;
+	padding: 0px 5px;
+	margin-left: 10px;
+	color: wheat;
+}
