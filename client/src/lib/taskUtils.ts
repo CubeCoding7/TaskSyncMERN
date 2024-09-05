@@ -34,6 +34,19 @@ export const sortTasks = (tasks: Task[], category: string) => {
 			if (category === 'all') {
 				return true;
 			}
+			if (category === 'today' && !task.completed) {
+				let dueDateStr: string;
+
+				if (task.dueDate instanceof Date) {
+					dueDateStr = task.dueDate.toISOString().split('T')[0];
+				} else if (typeof task.dueDate === 'string') {
+					dueDateStr = task.dueDate.split('T')[0];
+				} else {
+					return false;
+				}
+				const today = new Date().toISOString().split('T')[0];
+				return dueDateStr === today;
+			}
 			return task.category === category && !task.completed;
 		})
 		.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
