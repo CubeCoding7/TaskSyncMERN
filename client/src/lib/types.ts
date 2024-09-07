@@ -9,7 +9,7 @@ export interface List {
 }
 
 export type Task = {
-	_id: string;
+	_id: number;
 	name: string;
 	description?: string;
 	dueDate?: Date | string | null | undefined;
