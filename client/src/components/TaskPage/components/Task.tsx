@@ -5,8 +5,10 @@ import { toggleTaskCompletion } from '../../../lib/taskUtils';
 import type { Task as TaskType } from '../../../lib/types';
 
 interface TaskProps {
+	key: number;
 	task: TaskType;
 	onTaskUpdate: (task: TaskType) => void;
+	dueDate?: Date;
 }
 
 const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
