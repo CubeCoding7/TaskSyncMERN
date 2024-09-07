@@ -66,14 +66,17 @@ const TaskNav = ({ toggleVisibility }: Props) => {
 				</div>
 				<div className={styles.listWrapper}>
 					{/* Render predefined categories */}
-					{categories.map((item) => (
-						<List
-							key={item.category}
-							name={item.name}
-							icon={item.icon}
-							category={item.category}
-						/>
-					))}
+					<div className={styles.defaultLists}>
+						{categories.map((item) => (
+							<List
+								key={item.category}
+								name={item.name}
+								icon={item.icon}
+								category={item.category}
+							/>
+						))}
+					</div>
+					<div className={styles.listDivider}></div>
 					<div className={styles.userLists}>
 						{/* Render user-created lists */}
 						{lists.map((list) => (

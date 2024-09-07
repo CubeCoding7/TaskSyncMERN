@@ -26,7 +26,7 @@
 	border: none;
 	cursor: pointer;
 	text-align: left;
-	padding: 3px 0px;
+	padding: 2px 0px;
 	font-size: inherit;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .listWrapper li {
-	margin: 15px 5px 0 5px;
+	margin: 7px 5px 0 5px;
 	border-radius: 10px;
 }
 
@@ -84,4 +84,12 @@
 .icon {
 	font-size: x-large;
 	color: var(--text-color);
+}
+
+.listDivider {
+	margin: 10px 10px;
+	width: 210px;
+	height: 2px;
+	background-color: var(--text-color);
+	border-radius: 20px;
 }
