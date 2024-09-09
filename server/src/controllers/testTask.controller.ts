@@ -5,33 +5,16 @@ import Task from '../models/task.model';
 import catchErrors from '../utils/catchErrors';
 import appAssert from '../utils/appAssert';
 import { NOT_FOUND, OK, BAD_REQUEST } from '../constants/http';
+import TaskModel from '../models/task.model';
 
-const dateRangeSchema = z.object({
-	startDate: z.string().optional(),
-	endDate: z.string().optional(),
-});
-
+// Handler to get all tasks for the user
 export const getTasks = catchErrors(async (req: Request, res: Response) => {
 	const userId = req.userId;
-
-	const { startDate, endDate } = dateRangeSchema.parse(req.query);
-
-	const query: any = { user_id: userId };
-	if (startDate && endDate) {
-		const start = new Date(startDate + 'Z');
-		const end = new Date(endDate + 'Z');
-
-		if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-			return res.status(BAD_REQUEST).json({ error: 'Invalid date format' });
-		}
-
-		query.dueDate = { $gte: start, $lte: end };
-	}
-
-	const tasks = await Task.find(query).sort({ createdAt: -1 });
+	const tasks = await Task.find({ user_id: userId }).sort({ createdAt: -1 });
 	return res.status(OK).json(tasks);
 });
 
+// Handler to get a single task by ID
 export const getTask = catchErrors(async (req: Request, res: Response) => {
 	const taskId = z.string().parse(req.params.id);
 	appAssert(mongoose.Types.ObjectId.isValid(taskId), NOT_FOUND, 'No such task');
@@ -40,29 +23,29 @@ export const getTask = catchErrors(async (req: Request, res: Response) => {
 	return res.status(OK).json(task);
 });
 
+// Handler to create a new task
 export const createTask = catchErrors(async (req: Request, res: Response) => {
-	const taskSchema = z.object({
-		name: z.string().nonempty(),
-		description: z.string().optional(),
-		dueDate: z.string().optional(),
-	});
+	const { name, description, dueDate } = req.body;
 
-	const { name, description, dueDate } = taskSchema.parse(req.body);
+	// Ensure name is provided
+	if (!name) {
+		return res.status(BAD_REQUEST).json({
+			error: 'Name is required',
+		});
+	}
 
+	// Create the task
 	const userId = req.userId;
-
-	const utcDueDate = dueDate ? new Date(dueDate + 'Z') : undefined;
-
 	const task = await Task.create({
 		name,
-		description,
-		dueDate: utcDueDate,
-		user_id: userId,
+		description, // Optional
+		dueDate, // Optional
+		user_id: userId, // Correct field name according to schema
 	});
-
 	return res.status(201).json(task);
 });
 
+// Handler to delete a task by ID
 export const deleteTask = catchErrors(async (req: Request, res: Response) => {
 	const taskId = z.string().parse(req.params.id);
 	appAssert(mongoose.Types.ObjectId.isValid(taskId), NOT_FOUND, 'No such task');
@@ -74,27 +57,16 @@ export const deleteTask = catchErrors(async (req: Request, res: Response) => {
 	return res.status(OK).json({ message: 'Task removed' });
 });
 
+// Handler to update a task by ID
 export const updateTask = catchErrors(async (req: Request, res: Response) => {
 	const taskId = z.string().parse(req.params.id);
 	appAssert(mongoose.Types.ObjectId.isValid(taskId), NOT_FOUND, 'No such task');
-
-	const updateSchema = z.object({
-		name: z.string().optional(),
-		description: z.string().optional(),
-		dueDate: z.string().optional(),
-		completed: z.boolean().optional(),
-	});
-
-	const updateData = updateSchema.parse(req.body);
-
 	const task = await Task.findOneAndUpdate(
-		{ _id: taskId, user_id: req.userId },
-		updateData,
+		{ _id: taskId, user_id: req.userId }, // Ensure task belongs to the user
+		req.body,
 		{ new: true }
 	);
-
 	appAssert(task, NOT_FOUND, 'No such task');
-
 	return res.status(OK).json(task);
 });
 
@@ -109,6 +81,7 @@ export const completeTask = catchErrors(async (req: Request, res: Response) => {
 	const task = await Task.findOne({ _id: taskId, user_id: req.userId });
 	appAssert(task, NOT_FOUND, 'No such task');
 
+	// Toggle completion status
 	task.completed = !task.completed;
 	await task.save();
 

@@ -8,15 +8,15 @@ export interface List {
 	updatedAt: Date;
 }
 
-export type Task = {
+export interface Task {
 	_id: number;
 	name: string;
 	description?: string;
-	dueDate?: Date | string | null | undefined;
+	dueDate?: Date;
 	user_id: string;
 	completed: boolean;
 	category: string;
-};
+}
 
 export interface User {
 	id: string;
@@ -25,13 +25,13 @@ export interface User {
 	token: string;
 }
 
-export interface Action {
-	type: 'SET_TASKS' | 'CREATE_TASK' | 'DELETE_TASK' | 'UPDATE_TASK';
-	payload: Task[] | Task;
-}
+// export interface Action {
+// 	type: 'SET_TASKS' | 'CREATE_TASK' | 'DELETE_TASK' | 'UPDATE_TASK';
+// 	payload: Task[] | Task;
+// }
 
-export type Dispatch = (action: Action) => void;
+// export type Dispatch = (action: Action) => void;
 
-export interface State {
-	tasks: Task[];
-}
+// export interface State {
+// 	tasks: Task[];
+// }

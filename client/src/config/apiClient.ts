@@ -10,16 +10,14 @@ const options = {
 const API = axios.create(options);
 const TokenRefreshClient = axios.create(options);
 
-// Add request interceptor to attach the token to every request
 API.interceptors.request.use((config) => {
-	const token = localStorage.getItem('accessToken'); // Adjust if needed
+	const token = localStorage.getItem('accessToken');
 	if (token) {
 		config.headers['Authorization'] = `Bearer ${token}`;
 	}
 	return config;
 });
 
-// Handle token refresh
 API.interceptors.response.use(
 	(response) => response.data,
 	async (error) => {
@@ -28,13 +26,11 @@ API.interceptors.response.use(
 
 		if (status === 401 && data?.errorCode === 'InvalidAccessToken') {
 			try {
-				// Refresh the token
 				const {
 					data: { accessToken },
 				} = await TokenRefreshClient.get('/auth/refresh');
-				localStorage.setItem('accessToken', accessToken); // Store the new token
+				localStorage.setItem('accessToken', accessToken);
 
-				// Update the config with the new token and retry the request
 				config.headers['Authorization'] = `Bearer ${accessToken}`;
 				return API(config);
 			} catch (refreshError) {

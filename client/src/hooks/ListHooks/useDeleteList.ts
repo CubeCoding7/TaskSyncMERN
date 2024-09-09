@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { deleteList } from '../../lib/api';
+import { deleteList } from '../../api/list';
 
 const useDeleteList = () => {
 	return useMutation<void, Error, string>({

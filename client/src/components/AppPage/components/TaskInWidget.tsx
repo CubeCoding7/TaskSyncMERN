@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styles from './TaskInWidget.module.css';
-import { toggleTaskCompletion } from '../../../lib/taskUtils';
-import type { Task as TaskType } from '../../../lib/types';
+import type { Task as TaskType } from '../../../types';
 import Checkbox from '../../TaskPage/components/Checkbox';
 
 interface TaskProps {
 	task: TaskType;
-	onTaskUpdate: (task: TaskType) => void;
+	onTaskUpdate: (id: number, updates: { completed?: boolean }) => void;
 }
 
 const TaskInWidget: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
-	const [isChecked, setIsChecked] = useState(false);
+	const [isChecked, setIsChecked] = useState(task.completed);
 
 	useEffect(() => {
 		setIsChecked(task.completed);
@@ -24,14 +23,9 @@ const TaskInWidget: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
 		return localDate.toLocaleDateString();
 	};
 
-	const handleCheckboxChange = async (checked: boolean) => {
+	const handleCheckboxChange = (checked: boolean) => {
 		setIsChecked(checked);
-		try {
-			const updatedTask = await toggleTaskCompletion(task._id);
-			onTaskUpdate(updatedTask);
-		} catch (error) {
-			console.error('Error updating task completion:', error);
-		}
+		onTaskUpdate(task._id, { completed: checked });
 	};
 	return (
 		<div className={styles.task}>

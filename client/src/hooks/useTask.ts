@@ -2,9 +2,18 @@
 
 import { useEffect } from 'react';
 import API from '../config/apiClient';
-import { Task, User, Dispatch } from '../lib/types'; // Adjust the path as needed
+import { Task, User, Dispatch } from '../types';
 
-const useFetchTasks = (user: User | null, dispatch: Dispatch) => {
+interface FetchTasksOptions {
+	startDate?: string;
+	endDate?: string;
+}
+
+const useFetchTasks = (
+	user: User | null,
+	dispatch: Dispatch,
+	options: FetchTasksOptions = {}
+) => {
 	useEffect(() => {
 		const fetchTasks = async () => {
 			if (!user) {
@@ -13,9 +22,16 @@ const useFetchTasks = (user: User | null, dispatch: Dispatch) => {
 			}
 
 			try {
-				const response = await API.get<{ tasks: Task[] }>(
-					`${import.meta.env.VITE_API_URL}/tasks`
-				);
+				const { startDate, endDate } = options;
+				let url = `${import.meta.env.VITE_API_URL}/tasks`;
+
+				if (startDate && endDate) {
+					url += `?startDate=${encodeURIComponent(
+						startDate
+					)}&endDate=${encodeURIComponent(endDate)}`;
+				}
+
+				const response = await API.get<{ tasks: Task[] }>(url);
 
 				const tasks = response;
 
@@ -30,7 +46,7 @@ const useFetchTasks = (user: User | null, dispatch: Dispatch) => {
 		};
 
 		fetchTasks();
-	}, [dispatch, user]);
+	}, [dispatch, user, options.endDate, options.startDate]);
 };
 
 export default useFetchTasks;

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { createList } from '../../lib/api';
-import { List } from '../../lib/types';
+import { createList } from '../../api/list';
+import { List } from '../../types';
 
 const useCreateList = () => {
 	return useMutation<List, Error, { name: string }>({

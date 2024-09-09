@@ -1,6 +1,7 @@
 import API from '../config/apiClient';
-import { List, User } from '../types';
+import { User } from '../types';
 
+// Response Interfaces
 interface LoginResponse {
 	token: string;
 	user: User;
@@ -22,12 +23,7 @@ interface ResetPasswordResponse {
 	message: string;
 }
 
-interface Session {
-	id: string;
-	createdAt: string;
-	expiresAt: string;
-}
-
+// Data Interfaces
 interface LoginData {
 	email: string;
 	password: string;
@@ -45,10 +41,14 @@ interface ResetPasswordData {
 	password: string;
 }
 
+// Auth Functions
 export const login = async (data: LoginData): Promise<LoginResponse> => {
 	return API.post('/auth/login', data);
 };
-export const logout = async () => API.get('/auth/logout');
+
+export const logout = async (): Promise<void> => {
+	return API.get('/auth/logout');
+};
 
 export const register = async (
 	data: RegisterData
@@ -72,39 +72,4 @@ export const resetPassword = async (
 	data: ResetPasswordData
 ): Promise<ResetPasswordResponse> => {
 	return API.post('/auth/password/reset', data);
-};
-
-export const getUser = async (): Promise<User> => {
-	return API.get('/user');
-};
-
-export const getSessions = async (): Promise<Session[]> => {
-	return API.get('/sessions');
-};
-
-export const deleteSession = async (id: string): Promise<void> => {
-	return API.delete(`/sessions/${id}`);
-};
-
-export const getLists = async (): Promise<List[]> => {
-	return API.get('/lists');
-};
-
-export const getList = async (id: string): Promise<List> => {
-	return API.get(`/lists/${id}`);
-};
-
-export const createList = async (data: { name: string }): Promise<List> => {
-	return API.post('/lists', data);
-};
-
-export const updateList = async (
-	id: string,
-	updates: Partial<{ name: string }>
-): Promise<List> => {
-	return API.put(`/lists/${id}`, updates);
-};
-
-export const deleteList = async (id: string): Promise<void> => {
-	return API.delete(`/lists/${id}`);
 };

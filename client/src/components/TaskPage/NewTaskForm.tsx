@@ -1,28 +1,19 @@
 import React, { useState } from 'react';
 import styles from './NewTaskForm.module.css';
-import { useTasksContext } from '../../hooks/useTasksContext';
-import useAuth from '../../hooks/useAuth';
 
 interface Props {
 	toggleVisibility: () => void;
 }
 
 const NewTaskForm = ({ toggleVisibility }: Props) => {
-	const { dispatch } = useTasksContext();
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [dueDate, setDueDate] = useState('');
 	const [error, setError] = useState<string | null>(null);
 	const [emptyFields, setEmptyFields] = useState<string[]>([]);
-	const { user } = useAuth();
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		if (user) {
-			// const user_id = user.id;
-			console.log(user.id);
-		}
 
 		const task = { name, description, dueDate };
 
@@ -48,7 +39,6 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
 			setError(null);
 			setEmptyFields([]);
 			console.log('new task added', json);
-			dispatch({ type: 'CREATE_TASK', payload: json });
 
 			toggleVisibility();
 		}

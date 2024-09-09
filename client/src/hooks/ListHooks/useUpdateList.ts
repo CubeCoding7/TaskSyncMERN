@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { updateList } from '../../lib/api';
-import { List } from '../../lib/types';
+import { updateList } from '../../api/list';
+import { List } from '../../types';
 
 const useUpdateList = () => {
 	return useMutation<

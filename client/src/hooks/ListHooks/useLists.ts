@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { getLists } from '../../lib/api';
-import { List } from '../../lib/types';
+import { getLists } from '../../api/list';
+import { List } from '../../types';
 
 export const LISTS = 'lists';
 

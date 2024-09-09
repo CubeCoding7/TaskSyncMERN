@@ -5,13 +5,10 @@ import {
 	faChevronRight,
 } from '@fortawesome/pro-solid-svg-icons';
 import styles from './Widget.module.css';
-// import { sortTasks } from '../lib/taskUtils';
-import { useTasksContext } from '../hooks/useTasksContext';
-import { Task as TaskType } from '../lib/types';
-// import useList from '../hooks/ListHooks/useList';
-import useFetchTasks from '../hooks/useTask';
-import useAuth from '../hooks/useAuth';
+import { Task as TaskType } from '../types';
 import TaskInWidget from './AppPage/components/TaskInWidget';
+import useTasks from '../hooks/TaskHooks/useTasks';
+import useUpdateTask from '../hooks/TaskHooks/useUpdateTask';
 
 interface Props {
 	name: string;
@@ -19,13 +16,11 @@ interface Props {
 }
 
 const Widget = ({ name, icon }: Props) => {
-	const { state, dispatch } = useTasksContext();
-	const { user } = useAuth();
+	const { tasks } = useTasks();
+	const { mutate: updateTask } = useUpdateTask();
 
-	useFetchTasks(user, dispatch);
-
-	const handleTaskUpdate = (updatedTask: TaskType) => {
-		dispatch({ type: 'UPDATE_TASK', payload: updatedTask });
+	const handleUpdate = (id: number, updates: { completed?: boolean }) => {
+		updateTask({ id, updates });
 	};
 
 	const sortTasks = (tasks: TaskType[]) => {
@@ -41,8 +36,6 @@ const Widget = ({ name, icon }: Props) => {
 
 				if (task.dueDate instanceof Date) {
 					dueDateStr = task.dueDate.toISOString().split('T')[0];
-				} else if (typeof task.dueDate === 'string') {
-					dueDateStr = task.dueDate.split('T')[0];
 				} else {
 					return false;
 				}
@@ -52,7 +45,7 @@ const Widget = ({ name, icon }: Props) => {
 			.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
 	};
 
-	const sortedTasks = sortTasks(state.tasks);
+	const sortedTasks = sortTasks(tasks);
 	return (
 		<div className={styles.widget}>
 			<div className={styles.widgetHead}>
@@ -82,7 +75,7 @@ const Widget = ({ name, icon }: Props) => {
 									<TaskInWidget
 										key={task._id}
 										task={task}
-										onTaskUpdate={handleTaskUpdate}
+										onTaskUpdate={handleUpdate}
 									/>
 								))}
 						</div>
@@ -94,7 +87,7 @@ const Widget = ({ name, icon }: Props) => {
 									<TaskInWidget
 										key={task._id}
 										task={task}
-										onTaskUpdate={handleTaskUpdate}
+										onTaskUpdate={handleUpdate}
 									/>
 								))}
 						</div>
