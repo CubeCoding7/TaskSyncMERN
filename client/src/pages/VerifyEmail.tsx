@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
-import { verifyEmail } from '../lib/api';
+import { verifyEmail } from '../api/auth';
 
 const VerifyEmail = () => {
 	const { code } = useParams();

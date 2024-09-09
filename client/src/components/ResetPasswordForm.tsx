@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { resetPassword } from '../lib/api';
+import { resetPassword } from '../api/auth';
 
 interface ResetPasswordFormProps {
 	code: string;

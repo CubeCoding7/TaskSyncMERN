@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './auth.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { login } from '../lib/api';
+import { login } from '../api/auth';
 
 const Login: React.FC = () => {
 	const location = useLocation();

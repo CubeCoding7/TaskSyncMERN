@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './auth.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { register } from '../lib/api';
+import { register } from '../api/auth';
 
 const Register: React.FC = () => {
 	const navigate = useNavigate();

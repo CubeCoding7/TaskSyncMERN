@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Dropdown.module.css';
 import queryClient from '../../../config/queryClient';
-import { logout } from '../../../lib/api';
+import { logout } from '../../../api/auth';
 import { useMutation } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
 

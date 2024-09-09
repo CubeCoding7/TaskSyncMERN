@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { sendPasswordResetEmail } from '../lib/api';
+import { sendPasswordResetEmail } from '../api/auth';
 import styles from './ForgotPassword.module.css';
 
 const ForgotPassword: React.FC = () => {
