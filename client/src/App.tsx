@@ -13,6 +13,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
 import { setNavigate } from './lib/navigation';
+import CalendarPage from './pages/CalendarPage';
 
 function App() {
 	const navigate = useNavigate();
@@ -34,7 +35,7 @@ function App() {
 				<Route element={<AppLayout />}>
 					<Route path="/app/home" element={<AppPage />} />
 					<Route path="/app/tasks/:listId" element={<TaskPage />} />
-					<Route path="/app/calendar" element={<PlaceholderPage />} />
+					<Route path="/app/calendar" element={<CalendarPage />} />
 					<Route path="/app/notes" element={<PlaceholderPage />} />
 					<Route path="/app/account/settings" element={<PlaceholderPage />} />
 					<Route path="/app/account/profile" element={<PlaceholderPage />} />
