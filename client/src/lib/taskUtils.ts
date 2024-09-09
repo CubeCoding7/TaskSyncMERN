@@ -2,27 +2,23 @@ import { Task as TaskType } from '../types';
 import { isToday, isTomorrow, isSameDay, startOfDay, format } from 'date-fns';
 
 export const formatDate = (date: Date | string | undefined): string => {
-	// Handle undefined or invalid input
 	if (!date) return '';
 
-	// Convert to Date object if it's a string
 	let d: Date;
 	if (typeof date === 'string') {
 		d = new Date(date);
 	} else if (date instanceof Date) {
 		d = date;
 	} else {
-		return ''; // Return an empty string for invalid types
+		return '';
 	}
 
-	// Check if the date is valid
 	if (isNaN(d.getTime())) {
-		return ''; // Return an empty string for invalid dates
+		return '';
 	}
 
-	// Extract components from the date in UTC
 	const day = d.getUTCDate();
-	const month = d.getUTCMonth(); // Months are zero-based
+	const month = d.getUTCMonth();
 	const year = d.getUTCFullYear();
 
 	// Define month names
@@ -57,15 +53,17 @@ export const sortTasks = (tasks: TaskType[], category: string) => {
 				return true;
 			}
 
-			if (category === 'today' && !task.completed) {
-				if (!task.dueDate) {
-					return false;
-				}
-				return isSameDay(startOfDay(new Date()), task.dueDate);
+			if (category === 'today' && !task.completed && task.dueDate) {
+				const today = new Date();
+				return isSameDay(formatDate(today), formatDate(task.dueDate));
 			}
 			return task.category === category && !task.completed;
 		})
 		.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
+};
+
+export const scheduledTasks = (tasks: TaskType[]) => {
+	return tasks;
 };
 
 export const formatDay = (date: Date): string => {

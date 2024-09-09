@@ -20,8 +20,6 @@ const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
 		setIsChecked(checked);
 		onTaskUpdate(task._id, { completed: checked });
 	};
-	console.log('Original Date:', task.dueDate);
-	console.log('Formatted Date:', formatDate(task.dueDate));
 
 	return (
 		<div className={styles.task}>
