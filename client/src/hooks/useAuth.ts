@@ -1,5 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { getUser, User } from '../lib/api';
+import { getUser } from '../api/user';
+import { User } from '../types';
 
 export const AUTH = 'auth';
 
