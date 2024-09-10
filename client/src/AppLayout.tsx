@@ -5,9 +5,28 @@ import AppHeader from './components/navigation/AppHeader';
 import styles from './AppLayout.module.css';
 import useAuth from './hooks/useAuth';
 import { useIsPathExcluded } from './lib/pathUtils';
+import { parseColor, rgbaToRgb } from './lib/colorUtils';
 
 const AppLayout: React.FC = () => {
 	const { user, isLoading } = useAuth();
+
+	if (user) {
+		document.documentElement.style.setProperty(
+			'--first-color',
+			user.settings.color1 || '0, 4, 255'
+		);
+		const colorStr = user.settings.color1 || '0, 4, 255';
+		const opacity = 0.6;
+		const { r, g, b } = parseColor(colorStr);
+		document.documentElement.style.setProperty(
+			'--header-color',
+			rgbaToRgb(r, g, b, opacity)
+		);
+		document.documentElement.style.setProperty(
+			'--second-color',
+			user.settings.color2 || '0, 199, 123'
+		);
+	}
 
 	const isExcluded = useIsPathExcluded();
 

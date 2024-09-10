@@ -15,6 +15,7 @@
 	--second-color: 0, 199, 123;
 	--first-color-opacity: rgba(var(--first-color), 0.6);
 	--second-color-opacity: rgba(var(--second-color), 0.6);
+	--header-color: rgb(102, 105, 254);
 
 	--background-gradient: linear-gradient(
 		rgb(var(--first-color)),
@@ -31,7 +32,7 @@
 		var(--second-color-opacity)
 	);
 
-	color: #0004ff;
+	color: rgb(0, 199, 123);
 	color: var(--text-color);
 }
 

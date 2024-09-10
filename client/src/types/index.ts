@@ -23,15 +23,19 @@ export interface User {
 	username: string;
 	email: string;
 	token: string;
+	settings: {
+		theme?: string;
+		notifications?: boolean;
+		language?: string;
+		color1?: string;
+		color2?: string;
+	};
 }
 
-// export interface Action {
-// 	type: 'SET_TASKS' | 'CREATE_TASK' | 'DELETE_TASK' | 'UPDATE_TASK';
-// 	payload: Task[] | Task;
-// }
-
-// export type Dispatch = (action: Action) => void;
-
-// export interface State {
-// 	tasks: Task[];
-// }
+export interface Settings {
+	theme?: string;
+	language?: string;
+	notifications?: boolean;
+	color1?: string;
+	color2?: string;
+}

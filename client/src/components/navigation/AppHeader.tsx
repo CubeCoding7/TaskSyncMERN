@@ -10,9 +10,11 @@ import styles from './AppHeader.module.css';
 import Dropdown from './Dropdown/Dropdown';
 import { useState } from 'react';
 import { useIsPathExcluded } from '../../lib/pathUtils';
+import Settings from '../Settings';
 
 function AppHeader() {
 	const [isDropdownVisible, setDropdownVisible] = useState(false);
+	const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
 	const handleCollapseClick = () => {
 		// Script to collapse/uncollapse the sidebar
@@ -52,9 +54,16 @@ function AppHeader() {
 			</div>
 
 			<div className={styles.headerRight}>
-				<Link to="/app/account/settings" className={styles.navLink}>
+				<button
+					onClick={() => setIsSettingsVisible(true)}
+					className={styles.navLink}
+				>
 					<FontAwesomeIcon icon={faGear} />
-				</Link>
+				</button>
+				<Settings
+					isVisible={isSettingsVisible}
+					onClose={() => setIsSettingsVisible(false)}
+				/>
 				<div className={styles.profileDropdown}>
 					<button onClick={handleCollapseDropdown} className={styles.navLink}>
 						<FontAwesomeIcon icon={faUser} />

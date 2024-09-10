@@ -6,10 +6,9 @@
 	padding: 0 15px;
 	position: fixed;
 	top: 0;
-	/* left: 82px; */
 	right: 0;
 	z-index: 1000;
-	background: #6669fe;
+	background: var(--header-color);
 }
 
 .navLink {

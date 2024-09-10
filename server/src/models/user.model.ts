@@ -6,6 +6,7 @@ export interface UserDocument extends mongoose.Document {
 	username: string;
 	password: string;
 	verified: boolean;
+	settings: Record<string, any>;
 	createdAt: Date;
 	updatedAt: Date;
 	comparePassword(val: string): Promise<boolean>;
@@ -15,6 +16,7 @@ export interface UserDocument extends mongoose.Document {
 		| 'email'
 		| 'username'
 		| 'verified'
+		| 'settings'
 		| 'createdAt'
 		| 'updatedAt'
 		| '__v'
@@ -27,6 +29,15 @@ const userSchema = new mongoose.Schema<UserDocument>(
 		username: { type: String, required: true, unique: true },
 		password: { type: String, required: true },
 		verified: { type: Boolean, required: true, default: false },
+		settings: {
+			type: mongoose.Schema.Types.Mixed,
+			default: {
+				theme: 'light',
+				notifications: true,
+				color1: '0, 4, 255',
+				color2: '0, 199, 123',
+			},
+		},
 	},
 	{
 		timestamps: true,

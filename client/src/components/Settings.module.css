@@ -1,0 +1,213 @@
+/* Overlay for the entire modal */
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--opacity-black); /* Dark transparent background */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+}
+
+/* Modal container */
+.modal {
+	display: flex;
+	width: 800px;
+	height: 600px;
+	background-color: var(--main-color); /* Dark modal background */
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* Strong shadow for focus */
+}
+
+/* Sidebar navigation */
+.sidebar {
+	width: 240px;
+	background-color: var(--alt-color); /* Darker sidebar */
+	color: var(--text-color);
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	border-right: 1px solid var(--border-color); /* Slight border between sidebar and main content */
+}
+
+.sidebar ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar li {
+	padding: 12px;
+	cursor: pointer;
+	color: var(--text-color);
+	border-radius: 4px;
+	margin-bottom: 5px;
+	font-size: 0.9rem;
+	transition: background 0.3s ease-in-out;
+}
+
+.sidebar li:hover,
+.sidebar .active {
+	background-color: var(--opacity-text);
+	color: white;
+}
+
+/* Main content area */
+.mainContent {
+	flex-grow: 1;
+	padding: 30px;
+	color: var(--text-color);
+	background-color: var(--main-color); /* Keeping consistent dark theme */
+	overflow-y: auto;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.photoSection {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.avatar {
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+	margin-right: 20px;
+	/* border: 2px solid var(--background-gradient-deg); */
+}
+
+.settingOption {
+	margin-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.settingOption label {
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: var(--text-color); /* Light text color */
+}
+
+.settingOption input {
+	padding: 12px;
+	border-radius: 5px;
+	border: 1px solid var(--border-color); /* Slight border */
+	background-color: var(--alt-color); /* Dark input field */
+	color: var(--text-color); /* Light text */
+	font-size: 0.9rem;
+}
+
+/* .settingOption input:focus {
+	border-color: var(--accent-color);
+	outline: none;
+} */
+
+/* Buttons */
+.primaryButton {
+	background-color: #3337ff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 0.9rem;
+}
+
+.secondaryButton {
+	background-color: transparent;
+	color: var(--text-color);
+	border: 1px solid var(--text-color);
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	margin-left: 10px;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+	opacity: 0.85; /* Hover effect */
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 42px;
+	height: 22px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--border-color); /* Darker background */
+	transition: 0.4s;
+	border-radius: 22px;
+}
+
+.slider:before {
+	position: absolute;
+	content: '';
+	height: 18px;
+	width: 18px;
+	left: 2px;
+	bottom: 2px;
+	background-color: white;
+	transition: 0.4s;
+	border-radius: 50%;
+}
+
+input:checked + .slider {
+	background-image: var(--background-gradient-deg);
+}
+
+input:checked + .slider:before {
+	transform: translateX(20px);
+}
+
+/* Close button */
+.closeButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	font-size: 1.5rem;
+	color: var(--gray-alt-color); /* Light gray close button */
+	cursor: pointer;
+}
+
+.closeButton:hover {
+	color: white;
+}
+
+/* Background gradient for some flair */
+.modal::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--background-gradient);
+	opacity: 0.15;
+	z-index: -1;
+}
