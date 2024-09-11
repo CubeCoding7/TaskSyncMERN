@@ -25,6 +25,12 @@ app.use(
 );
 app.use(cookieParser());
 
+app.get('/', (_, res) => {
+	return res.status(200).json({
+		status: 'healthy!',
+	});
+});
+
 app.use((req: Request, res: Response, next: NextFunction) => {
 	console.log(req.path, req.method);
 	next();
@@ -40,6 +46,5 @@ app.use(errorHandler);
 
 app.listen(PORT, async () => {
 	console.log(`Server running on port ${PORT}`);
-
 	await connectToDatabase();
 });

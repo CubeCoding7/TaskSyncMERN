@@ -1,0 +1,12 @@
+{
+    local_certs
+}
+
+tasksync.localhost {
+    encode gzip
+    reverse_proxy client:5173
+}
+
+api.tasksync.localhost {
+    reverse_proxy api:5000
+}
