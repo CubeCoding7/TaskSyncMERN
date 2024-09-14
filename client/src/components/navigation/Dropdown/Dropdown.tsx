@@ -38,11 +38,11 @@ const Dropdown = ({ isVisible, onClose }: DropdownProps) => {
 
 	return (
 		<div className={styles.overlay} onClick={onClose}>
-			<div
-				className={`${styles.dropdownContent}`}
-				// onClick={(e) => e.stopPropagation()}
-			>
-				<div className={styles.accountSection}>
+			<div className={`${styles.dropdownContent}`}>
+				<div
+					className={styles.accountSection}
+					onClick={(e) => e.stopPropagation()}
+				>
 					<div className={styles.profile}>
 						<img src="/img/logo.svg" alt="" />
 						<div className={styles.profileDetails}>
