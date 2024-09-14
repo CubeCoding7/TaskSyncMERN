@@ -4,7 +4,8 @@ import queryClient from '../../../config/queryClient';
 import { logout } from '../../../api/auth';
 import { useMutation } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
-import { useSettings } from '../../../context/SettingsContext';
+import { useSettings } from '../../../hooks/useSettings';
+
 // import { useState } from 'react';
 
 interface DropdownProps {

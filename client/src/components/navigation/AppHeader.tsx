@@ -10,7 +10,7 @@ import styles from './AppHeader.module.css';
 import Dropdown from './Dropdown/Dropdown';
 import { useState } from 'react';
 import { useIsPathExcluded } from '../../lib/pathUtils';
-import { useSettings } from '../../context/SettingsContext';
+import { useSettings } from '../../hooks/useSettings';
 
 function AppHeader() {
 	const [isDropdownVisible, setDropdownVisible] = useState(false);

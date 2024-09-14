@@ -5,7 +5,7 @@ import '../index.css';
 import { hexToRgb, rgbToHex } from '../lib/colorUtils';
 import { Settings as SettingsType } from '../types';
 import useUpdateSettings from '../hooks/useUpdateSettings';
-import { useSettings } from '../context/SettingsContext';
+import { useSettings } from '../hooks/useSettings';
 
 const Settings: React.FC = () => {
 	const { isVisible, hideSettings, tab } = useSettings();

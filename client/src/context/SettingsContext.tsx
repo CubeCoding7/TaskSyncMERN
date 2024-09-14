@@ -1,23 +1,15 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 
-interface SettingsContextType {
+export interface SettingsContextType {
 	isVisible: boolean;
 	showSettings: (tab: string) => void;
 	hideSettings: () => void;
 	tab: string;
 }
 
-const SettingsContext = createContext<SettingsContextType | undefined>(
+export const SettingsContext = createContext<SettingsContextType | undefined>(
 	undefined
 );
-
-export const useSettings = () => {
-	const context = useContext(SettingsContext);
-	if (!context) {
-		throw new Error('useSettings must be used within a SettingsProvider');
-	}
-	return context;
-};
 
 interface SettingsProviderProps {
 	children: ReactNode;

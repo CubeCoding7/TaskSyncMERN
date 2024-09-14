@@ -1,4 +1,5 @@
-import { SettingsContext } from '../context/SettingsContext';
+import { useContext } from 'react';
+import { SettingsContext } from '../context/SettingsContext'; // Adjust the import path
 
 export const useSettings = () => {
 	const context = useContext(SettingsContext);
