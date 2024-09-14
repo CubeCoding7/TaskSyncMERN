@@ -14,12 +14,15 @@ import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
 import { setNavigate } from './lib/navigation';
 import CalendarPage from './pages/CalendarPage';
+import Settings from './components/Settings';
 
 function App() {
 	const navigate = useNavigate();
 	setNavigate(navigate);
 	return (
 		<div className="App">
+			<Settings />
+
 			<Routes>
 				<Route path="/" element={<HomeLayout />}>
 					<Route index element={<HomePage />} />

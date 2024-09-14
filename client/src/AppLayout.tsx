@@ -45,6 +45,7 @@ const AppLayout: React.FC = () => {
 				}}
 			>
 				<div className={styles.background}></div>
+
 				<Outlet />
 			</div>
 		</div>

@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Settings.module.css';
 import useAuth from '../hooks/useAuth';
 import '../index.css';
 import { hexToRgb, rgbToHex } from '../lib/colorUtils';
 import { Settings as SettingsType } from '../types';
 import useUpdateSettings from '../hooks/useUpdateSettings';
+import { useSettings } from '../context/SettingsContext';
 
-interface SettingsProps {
-	isVisible: boolean;
-	onClose: () => void;
-}
-
-const Settings: React.FC<SettingsProps> = ({ isVisible, onClose }) => {
+const Settings: React.FC = () => {
+	const { isVisible, hideSettings, tab } = useSettings();
 	const [selectedTab, setSelectedTab] = useState('account');
+
+	useEffect(() => {
+		setSelectedTab(tab);
+	}, [tab]);
+
 	const { user } = useAuth();
 	const [color1, setColor1] = useState<string>(rgbToHex(user?.settings.color1));
 	const [color2, setColor2] = useState<string>(
@@ -41,37 +43,7 @@ const Settings: React.FC<SettingsProps> = ({ isVisible, onClose }) => {
 				return (
 					<div className={styles.content}>
 						<h2>Account</h2>
-						{/* <div className={styles.photoSection}>
-							<img
-								className={styles.avatar}
-								src="https://via.placeholder.com/80"
-								alt="User avatar"
-							/>
-							<div>
-								<button className={styles.primaryButton}>Change photo</button>
-								<button className={styles.secondaryButton}>Remove photo</button>
-							</div>
-						</div> */}
-						<div className={styles.settingOption}>
-							<label>Name</label>
-							<input type="text" value={user?.username} disabled />
-						</div>
-						<div className={styles.settingOption}>
-							<label>Email</label>
-							<input type="email" value={user?.email} disabled />
-							<button className={styles.primaryButton}>Change email</button>
-						</div>
-						<div className={styles.settingOption}>
-							<label>Password</label>
-							<button className={styles.primaryButton}>Change password</button>
-						</div>
-						<div className={styles.settingOption}>
-							<label>Two-factor authentication</label>
-							<label className={styles.switch}>
-								<input type="checkbox" />
-								<span className={styles.slider}></span>
-							</label>
-						</div>
+						{/* Your account-related settings */}
 					</div>
 				);
 			case 'general':
@@ -114,7 +86,7 @@ const Settings: React.FC<SettingsProps> = ({ isVisible, onClose }) => {
 	if (!isVisible) return null;
 
 	return (
-		<div className={styles.overlay} onClick={onClose}>
+		<div className={styles.overlay} onClick={hideSettings}>
 			<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
 				<div className={styles.sidebar}>
 					<ul>
@@ -136,11 +108,10 @@ const Settings: React.FC<SettingsProps> = ({ isVisible, onClose }) => {
 						>
 							Appearance
 						</li>
-						{/* Add more sidebar items here */}
 					</ul>
 				</div>
 				<div className={styles.mainContent}>{renderContent()}</div>
-				<button className={styles.closeButton} onClick={onClose}>
+				<button className={styles.closeButton} onClick={hideSettings}>
 					X
 				</button>
 			</div>

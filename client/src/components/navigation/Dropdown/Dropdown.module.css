@@ -1,92 +1,101 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	z-index: 998;
+}
+
 .dropdownContent {
-  display: none;
-  position: absolute;
-  background-color: var(--main-color);
-  right: 5px;
-  width: 330px;
-  z-index: 1;
-  margin-top: 10px;
-  border-radius: 10px;
-  font-size: 0.9em;
-  box-shadow: -8px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	background-color: var(--main-color);
+	right: 5px;
+	width: 330px;
+	z-index: 1;
+	margin-top: 63px;
+	border-radius: 10px;
+	font-size: 0.9em;
+	box-shadow: -8px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dropdownContent a,
-.dropdownContent button {
-  display: block;
-  padding: 6px 0px 6px 15px;
-  text-decoration: none;
-  color: var(--text-color);
-  font-size: 0.9em;
-  font-weight: 500;
-  font-family: inherit;
+.dropdownContent .navLink {
+	display: block;
+	padding: 6px 0px 6px 15px;
+	text-decoration: none;
+	color: var(--text-color);
+	font-size: 0.9em;
+	font-weight: 500;
+	font-family: inherit;
 }
 
 .dropdownContent a:last-child {
-  margin-bottom: 6px;
+	margin-bottom: 6px;
 }
 
 .dropdownContent a:hover {
-  background-color: var(--alt-color);
+	background-color: var(--alt-color);
 }
 
-.dropdownContent button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
+.dropdownContent .navLink {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	text-align: left;
 }
 
-.dropdownContent button:hover {
-  background-color: var(--alt-color);
+.dropdownContent .navLink:hover {
+	background-color: var(--alt-color);
 }
 
-.dropdownContent button:last-child {
-  margin-bottom: 6px;
+.dropdownContent .navLink:last-child {
+	margin-bottom: 6px;
 }
 
 .dropdownContent img {
-  height: 40px;
+	height: 40px;
 }
 
 .dropdownContent.show {
-  display: block;
+	display: block;
 }
 
 .profile {
-  display: flex;
-  align-items: center;
-  padding: 15px 0px 15px 15px;
+	display: flex;
+	align-items: center;
+	padding: 15px 0px 15px 15px;
 }
 
 .profile img {
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  margin-right: 10px;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	margin-right: 10px;
 }
 
 .profileDetails {
-  display: flex;
-  flex-direction: column;
-  padding-right: 10px;
+	display: flex;
+	flex-direction: column;
+	padding-right: 10px;
 }
 
 .profileDetails span:first-child {
-  font-weight: bold;
-  font-size: 1em;
+	font-weight: bold;
+	font-size: 1em;
 }
 
 .profileDetails span:last-child {
-  font-size: 0.9em;
-  color: #636363;
-  font-weight: 600;
+	font-size: 0.9em;
+	color: #636363;
+	font-weight: 600;
 }
 
 .sectionDivider {
-  content: "";
-  border: 1px solid var(--alt-color);
-  margin: 10px 7px 10px 7px;
-  border-radius: 50px;
+	content: '';
+	border: 1px solid var(--alt-color);
+	margin: 10px 7px 10px 7px;
+	border-radius: 50px;
 }

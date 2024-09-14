@@ -40,8 +40,9 @@ body {
 	font-family: 'Poppins', sans-serif;
 	font-weight: 700;
 	margin: 0;
-	height: 100vh;
+	/* height: 100vh; */
 	/* overflow: hidden; */
+	height: 100%;
 }
 
 h1,
@@ -66,6 +67,10 @@ p {
 	width: 24px;
 	height: 24px;
 	animation: spin 1s linear infinite;
+}
+
+.App {
+	display: block;
 }
 
 @keyframes spin {
