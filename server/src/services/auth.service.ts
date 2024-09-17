@@ -91,10 +91,10 @@ export const createAccount = async (data: CreateAccountParams) => {
 };
 
 export interface LoginParams {
-	email?: string; // Optional because either email or username should be provided
-	username?: string; // Optional for the same reason
+	email?: string;
+	username?: string;
 	password: string;
-	userAgent?: string; // Optional since it's not always present
+	userAgent?: string;
 }
 
 export const loginUser = async ({

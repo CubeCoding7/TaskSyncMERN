@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
 
-// Define the excluded paths within the utility file
 const excludedPaths: string[] = ['/app/account'];
 
 export function useIsPathExcluded(): boolean {

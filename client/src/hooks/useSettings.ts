@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SettingsContext } from '../context/SettingsContext'; // Adjust the import path
+import { SettingsContext } from '../context/SettingsContext';
 
 export const useSettings = () => {
 	const context = useContext(SettingsContext);

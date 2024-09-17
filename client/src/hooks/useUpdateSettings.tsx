@@ -5,11 +5,7 @@ import queryClient from '../config/queryClient';
 import { Settings } from '../types';
 
 const useUpdateSettings = () => {
-	return useMutation<
-		void, // No data is returned on success
-		Error, // Error type
-		Settings // The type for the mutation variables
-	>({
+	return useMutation<void, Error, Settings>({
 		mutationFn: (settings: Settings) => updateUserSettings(settings),
 		onSuccess: () => {
 			queryClient.invalidateQueries();

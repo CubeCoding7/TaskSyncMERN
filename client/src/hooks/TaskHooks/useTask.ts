@@ -1,5 +1,5 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { getTask } from '../../api/task'; // Adjust path as necessary
+import { getTask } from '../../api/task';
 import { Task } from '../../types';
 
 const useTask = (

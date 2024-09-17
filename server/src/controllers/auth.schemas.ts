@@ -16,18 +16,15 @@ const passwordSchema = z.string().min(6).max(255);
 
 export const loginSchema = z
 	.object({
-		email: emailSchema.optional(), // Optional here
-		username: usernameSchema.optional(), // Optional here
+		email: emailSchema.optional(),
+		username: usernameSchema.optional(),
 		password: passwordSchema,
 		userAgent: z.string().optional(),
 	})
-	.refine(
-		(data) => data.email || data.username, // Ensure at least one is provided
-		{
-			message: 'Either username or email is required',
-			path: ['username', 'email'], // Attach error to both fields
-		}
-	);
+	.refine((data) => data.email || data.username, {
+		message: 'Either username or email is required',
+		path: ['username', 'email'],
+	});
 
 export const registerSchema = z
 	.object({

@@ -5,7 +5,6 @@ import { UNAUTHORIZED } from '../constants/http';
 import { verifyToken } from '../utils/jwt';
 import mongoose from 'mongoose';
 
-// wrap with catchErrors() if you need this to be async
 const authenticate: RequestHandler = (req, res, next) => {
 	const accessToken = req.cookies.accessToken as string | undefined;
 	appAssert(

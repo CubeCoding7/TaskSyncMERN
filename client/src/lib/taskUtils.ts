@@ -21,7 +21,6 @@ export const formatDate = (date: Date | string | undefined): string => {
 	const month = d.getUTCMonth();
 	const year = d.getUTCFullYear();
 
-	// Define month names
 	const monthNames = [
 		'January',
 		'February',
@@ -37,7 +36,6 @@ export const formatDate = (date: Date | string | undefined): string => {
 		'December',
 	];
 
-	// Format date as "MMM d, yyyy"
 	const formattedDate = `${monthNames[month].substring(0, 3)} ${day}, ${year}`;
 
 	return formattedDate;
@@ -85,20 +83,17 @@ export const getTasksForDay = (date: Date, tasks: TaskType[]): TaskType[] => {
 		let dueDate: Date;
 
 		if (typeof task.dueDate === 'string') {
-			// Convert string to Date object with proper timezone handling
 			dueDate = new Date(task.dueDate);
 		} else if (task.dueDate instanceof Date) {
 			dueDate = task.dueDate;
 		} else {
-			return false; // If dueDate is undefined or invalid, skip the task
+			return false;
 		}
 
-		// Normalize dueDate to the start of the day (ignoring time zone issues)
 		dueDate = startOfDay(
 			new Date(dueDate.getTime() + dueDate.getTimezoneOffset() * 60000)
 		);
 
-		// Compare the start of the day to check if the task is for this day
 		return isSameDay(startOfDayDate, dueDate);
 	});
 };

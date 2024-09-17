@@ -8,7 +8,7 @@ const VerifyEmail = () => {
 	const { isPending, isSuccess, isError } = useQuery({
 		queryKey: ['emailVerification', code],
 		queryFn: () => verifyEmail(code || ''),
-		enabled: !!code, // Only run the query if code is defined
+		enabled: !!code,
 	});
 
 	if (!code) {

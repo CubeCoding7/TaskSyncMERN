@@ -15,19 +15,12 @@ import List from './components/List';
 import UserList from './components/UserList';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import useLists from '../../hooks/ListHooks/useLists';
-// import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import useList from '../../hooks/ListHooks/useList';
 
 interface Props {
 	toggleVisibility: () => void;
 }
 
 const TaskNav = ({ toggleVisibility }: Props) => {
-	// const { id } = useParams();
-	// const list = useList(id);
-
-	// const [isActive, setIsActive] = useState(false);
 	const { lists } = useLists();
 
 	const categories: { name: string; icon: IconProp; category: string }[] = [

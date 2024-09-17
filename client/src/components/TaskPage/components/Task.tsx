@@ -3,7 +3,6 @@ import styles from './Task.module.css';
 import Checkbox from './Checkbox';
 import { formatDate } from '../../../lib/taskUtils';
 import type { Task as TaskType } from '../../../types';
-// import { format } from 'date-fns';
 
 interface TaskProps {
 	task: TaskType;

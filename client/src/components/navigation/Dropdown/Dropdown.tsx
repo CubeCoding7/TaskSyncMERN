@@ -6,8 +6,6 @@ import { useMutation } from '@tanstack/react-query';
 import useAuth from '../../../hooks/useAuth';
 import { useSettings } from '../../../hooks/useSettings';
 
-// import { useState } from 'react';
-
 interface DropdownProps {
 	isVisible: boolean;
 	onClose: () => void;
@@ -32,8 +30,6 @@ const Dropdown = ({ isVisible, onClose }: DropdownProps) => {
 	const handleSignOut = () => {
 		signOut();
 	};
-
-	// const setVisible = () => {};
 
 	if (!isVisible) return null;
 

@@ -30,7 +30,7 @@ function AppHeader() {
 		<header
 			className={styles.header}
 			style={{
-				left: isExcluded ? '0px' : '82px', // Adjust for sidebar offset
+				left: isExcluded ? '0px' : '82px',
 			}}
 		>
 			<div className={styles.headerLeft}>
