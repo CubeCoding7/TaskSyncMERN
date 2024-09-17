@@ -16,7 +16,9 @@ const Settings: React.FC = () => {
 	}, [tab]);
 
 	const { user } = useAuth();
-	const [color1, setColor1] = useState<string>(rgbToHex(user?.settings.color1));
+	const [color1, setColor1] = useState<string>(
+		rgbToHex(user?.settings.color1) || '#00c77b'
+	);
 	const [color2, setColor2] = useState<string>(
 		rgbToHex(user?.settings.color2) || '#00c77b'
 	);
