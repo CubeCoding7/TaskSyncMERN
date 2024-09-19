@@ -6,6 +6,8 @@ import styles from './AppLayout.module.css';
 import useAuth from './hooks/useAuth';
 import { useIsPathExcluded } from './lib/pathUtils';
 import { parseColor, rgbaToRgb } from './lib/colorUtils';
+import { SettingsProvider } from './context/SettingsContext';
+import Settings from './components/Settings';
 
 const AppLayout: React.FC = () => {
 	const { user, isLoading } = useAuth();
@@ -35,20 +37,23 @@ const AppLayout: React.FC = () => {
 			<div className="spinner"></div>
 		</div>
 	) : user ? (
-		<div className={styles.appContainer}>
-			{!isExcluded && <Sidebar />}
-			<AppHeader />
-			<div
-				className={styles.mainContent}
-				style={{
-					marginLeft: isExcluded ? '0px' : '80px',
-				}}
-			>
-				<div className={styles.background}></div>
+		<SettingsProvider>
+			<Settings />
+			<div className={styles.appContainer}>
+				{!isExcluded && <Sidebar />}
+				<AppHeader />
+				<div
+					className={styles.mainContent}
+					style={{
+						marginLeft: isExcluded ? '0px' : '80px',
+					}}
+				>
+					<div className={styles.background}></div>
 
-				<Outlet />
+					<Outlet />
+				</div>
 			</div>
-		</div>
+		</SettingsProvider>
 	) : (
 		<Navigate
 			to="/login"
