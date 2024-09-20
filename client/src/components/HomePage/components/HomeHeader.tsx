@@ -7,6 +7,7 @@ import Menu from './Menu';
 
 function HomeHeader() {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 
 	const toggleMobileMenu = () => {
 		setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -34,11 +35,16 @@ function HomeHeader() {
 					Help
 				</Link>
 				<div className={styles.headerDivider}></div>
-				<Link to="/register" className={styles.sign_up_button}>
-					Sign up for free
-				</Link>
 				<Link to="/login" className={styles.nav_button}>
 					Log in
+				</Link>
+				<Link
+					to="/register"
+					className={isHovered ? styles.signUpButtonHover : styles.signUpButton}
+					onMouseEnter={() => setIsHovered(true)}
+					onMouseLeave={() => setIsHovered(false)}
+				>
+					Sign up for free
 				</Link>
 			</nav>
 			<Menu isVisible={isMobileMenuOpen} onClose={toggleMobileMenu}></Menu>

@@ -52,28 +52,52 @@ nav {
 	margin-right: 20px;
 }
 
-.nav_button,
-.sign_up_button {
-	text-decoration: none;
+.navButton,
+.signUpButton {
 	color: var(--text-color);
 	font-size: 16px;
 	padding: 10px 20px;
-	transition: all 0.3s ease;
 	border-radius: 5px;
+	text-decoration: none;
 }
 
-.sign_up_button {
-	background: var(--background-gradient-deg);
+.signUpButton {
 	color: white;
-	padding: 10px 25px;
+	position: relative;
+	padding: 10px 20px;
 	font-weight: bold;
-	border-radius: 20px;
+	border-radius: 14px;
+	background: var(--background-gradient-deg);
 }
 
-.sign_up_button:hover {
-	background: none;
-	border: 2px solid var(--background-gradient-deg);
-	color: var(--background-gradient-deg);
+.signUpButtonHover {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	position: relative;
+	z-index: 1;
+
+	background: var(--background-gradient-deg);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.signUpButtonHover::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	border-radius: 14px;
+	padding: 2px;
+	background: var(--background-gradient-deg);
+	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	mask-composite: exclude;
 }
 
 .headerDivider {
@@ -107,12 +131,6 @@ nav {
 	.headerDivider {
 		width: 190px;
 		height: 2px;
-	}
-
-	.nav_button,
-	.sign_up_button {
-		padding: 8px 12px;
-		font-size: 18px;
 	}
 
 	.hamburger {
