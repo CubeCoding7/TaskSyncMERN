@@ -1,3 +1,11 @@
+.formContent {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 60vh;
+	/* background: white; */
+}
+
 .login,
 .signup {
 	width: 360px;
@@ -5,7 +13,6 @@
 	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 	border-radius: 15px;
 	padding: 30px;
-	background: white;
 }
 
 .input {
@@ -39,4 +46,25 @@
 	margin: 10px 2px;
 	font-size: 0.8em;
 	font-weight: bold;
+}
+
+@media (max-width: 460px) {
+	.formContent {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		min-height: 120vh;
+	}
+
+	.login,
+	.signup {
+		display: flex;
+		position: fixed;
+		flex-direction: column;
+		background-color: white;
+		padding-right: 200px;
+		width: 87%;
+		height: 100%;
+		z-index: 998;
+	}
 }

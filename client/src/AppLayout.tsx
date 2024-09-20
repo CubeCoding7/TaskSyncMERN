@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import Sidebar from './components/navigation/SideBar';
-import AppHeader from './components/navigation/AppHeader';
+import AppHeader from './components/AppPage/components/AppHeader';
 import styles from './AppLayout.module.css';
 import useAuth from './hooks/useAuth';
 import { useIsPathExcluded } from './lib/pathUtils';

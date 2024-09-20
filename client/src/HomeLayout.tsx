@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import HomeHeader from './components/navigation/HomeHeader';
+import HomeHeader from './components/HomePage/components/HomeHeader';
 import { parseColor, rgbaToRgb } from './lib/colorUtils';
 
 function HomeLayout() {
@@ -16,7 +16,7 @@ function HomeLayout() {
 	return (
 		<div className="App">
 			<HomeHeader />
-			<div style={{ marginTop: '60px' }}>
+			<div style={{ marginTop: '80px' }}>
 				<Outlet />
 			</div>
 		</div>

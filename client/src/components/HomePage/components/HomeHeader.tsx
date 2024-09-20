@@ -2,8 +2,16 @@ import { Link } from 'react-router-dom';
 import styles from './HomeHeader.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/pro-solid-svg-icons';
+import { useState } from 'react';
+import Menu from './Menu';
 
 function HomeHeader() {
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+	const toggleMobileMenu = () => {
+		setIsMobileMenuOpen(!isMobileMenuOpen);
+	};
+
 	return (
 		<header className={styles.header}>
 			<div className={styles.logo}>
@@ -15,7 +23,7 @@ function HomeHeader() {
 			<button className={styles.hamburger} onClick={toggleMobileMenu}>
 				<FontAwesomeIcon icon={faBars} />
 			</button>
-			<nav>
+			<nav className={`${styles.nav}`}>
 				<Link to="/features" className={styles.nav_button}>
 					Features
 				</Link>
@@ -33,6 +41,7 @@ function HomeHeader() {
 					Log in
 				</Link>
 			</nav>
+			<Menu isVisible={isMobileMenuOpen} onClose={toggleMobileMenu}></Menu>
 		</header>
 	);
 }
