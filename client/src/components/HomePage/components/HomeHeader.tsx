@@ -36,7 +36,10 @@ function HomeHeader() {
 			<button className={styles.hamburger} onClick={toggleMobileMenu}>
 				<FontAwesomeIcon icon={faBars} />
 			</button>
-			<Menu isVisible={isMobileMenuOpen} onClose={toggleMobileMenu}></Menu>
+			<Menu
+				isVisible={isMobileMenuOpen}
+				onClose={() => setIsMobileMenuOpen(false)}
+			/>
 		</header>
 	);
 }
