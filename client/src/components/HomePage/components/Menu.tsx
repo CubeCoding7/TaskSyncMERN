@@ -9,10 +9,9 @@ interface MenuProps {
 
 const Dropdown = ({ isVisible, onClose }: MenuProps) => {
 	const [isHovered, setIsHovered] = useState(false);
-	if (!isVisible) return null;
 
 	return (
-		<div className={styles.overlay} onClick={onClose}>
+		<nav className={isVisible ? styles.overlay : styles.nav} onClick={onClose}>
 			<Link to="/features" className={styles.navButton}>
 				Features
 			</Link>
@@ -34,7 +33,7 @@ const Dropdown = ({ isVisible, onClose }: MenuProps) => {
 			>
 				Sign up for free
 			</Link>
-		</div>
+		</nav>
 	);
 };
 
