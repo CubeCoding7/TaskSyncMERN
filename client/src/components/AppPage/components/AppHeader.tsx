@@ -35,7 +35,10 @@ function AppHeader() {
 		>
 			<div className={styles.headerLeft}>
 				{!isExcluded && (
-					<button onClick={handleCollapseClick} className={styles.navLink}>
+					<button
+						onClick={handleCollapseClick}
+						className={`${styles.navLink} ${styles.bars}`}
+					>
 						<FontAwesomeIcon icon={faBars} />
 					</button>
 				)}
@@ -56,7 +59,7 @@ function AppHeader() {
 			<div className={styles.headerRight}>
 				<button
 					onClick={() => showSettings('account')}
-					className={styles.navLink}
+					className={`${styles.navLink} ${styles.settings}`}
 				>
 					<FontAwesomeIcon icon={faGear} />
 				</button>
