@@ -5,10 +5,10 @@ import {
 	faChevronRight,
 } from '@fortawesome/pro-solid-svg-icons';
 import styles from './Widget.module.css';
-import { Task as TaskType } from '../types';
 import TaskInWidget from './AppPage/components/TaskInWidget';
 import useTasks from '../hooks/TaskHooks/useTasks';
 import useUpdateTask from '../hooks/TaskHooks/useUpdateTask';
+import { sortTasks } from '../lib/taskUtils';
 
 interface Props {
 	name: string;
@@ -16,36 +16,22 @@ interface Props {
 }
 
 const Widget = ({ name, icon }: Props) => {
-	const { tasks } = useTasks();
+	const { tasks, refetch } = useTasks();
 	const { mutate: updateTask } = useUpdateTask();
+	
 
 	const handleUpdate = (id: number, updates: { completed?: boolean }) => {
-		updateTask({ id, updates });
+		updateTask(
+			{ id, updates },
+			{
+				onSuccess: () => {
+					refetch();
+				},
+			}
+		);
 	};
 
-	const sortTasks = (tasks: TaskType[]) => {
-		const today = new Date().toISOString().split('T')[0];
-
-		return tasks
-			.filter((task) => {
-				if (task.completed) return false;
-
-				if (task.dueDate == null) return false;
-
-				let dueDateStr: string;
-
-				if (task.dueDate instanceof Date) {
-					dueDateStr = task.dueDate.toISOString().split('T')[0];
-				} else {
-					return false;
-				}
-
-				return dueDateStr === today;
-			})
-			.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
-	};
-
-	const sortedTasks = sortTasks(tasks);
+	const sortedTasks = sortTasks(tasks, 'today');
 	return (
 		<div className={styles.widget}>
 			<div className={styles.widgetHead}>
