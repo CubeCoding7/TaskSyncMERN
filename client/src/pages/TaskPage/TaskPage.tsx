@@ -102,7 +102,7 @@ function TaskPage() {
 				</div>
 			)}
 
-			{isVisible && <NewTaskForm toggleVisibility={toggleVisibility} />}
+			{isVisible && <NewTaskForm toggleVisibility={toggleVisibility} refetchTasks={refetch} />}
 		</TaskPageContent>
 	);
 }

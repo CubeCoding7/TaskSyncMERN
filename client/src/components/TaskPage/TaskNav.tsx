@@ -48,7 +48,7 @@ const TaskNav = ({ toggleVisibility }: Props) => {
 							</button>
 						</li>
 						<li>
-							<button className={styles.button} aria-label="Add History">
+							<button className={styles.button} >
 								<FontAwesomeIcon
 									className={styles.icon}
 									icon={faRectangleHistoryCirclePlus}

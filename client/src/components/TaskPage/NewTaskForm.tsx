@@ -3,9 +3,10 @@ import styles from './NewTaskForm.module.css';
 
 interface Props {
 	toggleVisibility: () => void;
+	refetchTasks: () => void;
 }
 
-const NewTaskForm = ({ toggleVisibility }: Props) => {
+const NewTaskForm = ({ toggleVisibility, refetchTasks }: Props) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [dueDate, setDueDate] = useState('');
@@ -40,6 +41,7 @@ const NewTaskForm = ({ toggleVisibility }: Props) => {
 			setEmptyFields([]);
 			console.log('new task added', json);
 
+			refetchTasks();
 			toggleVisibility();
 		}
 	};
