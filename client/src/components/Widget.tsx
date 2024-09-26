@@ -9,6 +9,7 @@ import TaskInWidget from './AppPage/components/TaskInWidget';
 import useTasks from '../hooks/TaskHooks/useTasks';
 import useUpdateTask from '../hooks/TaskHooks/useUpdateTask';
 import { sortTasks } from '../lib/taskUtils';
+import { useEffect, useState } from 'react';
 
 interface Props {
 	name: string;
@@ -18,7 +19,18 @@ interface Props {
 const Widget = ({ name, icon }: Props) => {
 	const { tasks, refetch } = useTasks();
 	const { mutate: updateTask } = useUpdateTask();
-	
+	const [isMobile, setIsMobile] = useState(window.innerWidth <= 1090);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 1090);
+		};
+
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	const handleUpdate = (id: number, updates: { completed?: boolean }) => {
 		updateTask(
@@ -53,30 +65,44 @@ const Widget = ({ name, icon }: Props) => {
 			</div>
 			<div className={styles.widgetBody}>
 				{name === 'Tasks' ? (
-					<div className={styles.taskColumns}>
-						<div className={styles.column}>
-							{sortedTasks
-								.slice(0, Math.ceil(sortedTasks.length / 2))
-								.map((task) => (
+					<div>
+						{isMobile ? (
+							<div className={styles.tasks}>
+								{sortedTasks.map((task) => (
 									<TaskInWidget
 										key={task._id}
 										task={task}
 										onTaskUpdate={handleUpdate}
 									/>
 								))}
-						</div>
-						<div className={styles.divider}></div>{' '}
-						<div className={styles.column}>
-							{sortedTasks
-								.slice(Math.ceil(sortedTasks.length / 2))
-								.map((task) => (
-									<TaskInWidget
-										key={task._id}
-										task={task}
-										onTaskUpdate={handleUpdate}
-									/>
-								))}
-						</div>
+							</div>
+						) : (
+							<div className={styles.taskColumns}>
+								<div className={styles.column}>
+									{sortedTasks
+										.slice(0, Math.ceil(sortedTasks.length / 2))
+										.map((task) => (
+											<TaskInWidget
+												key={task._id}
+												task={task}
+												onTaskUpdate={handleUpdate}
+											/>
+										))}
+								</div>
+								<div className={styles.divider}></div>
+								<div className={styles.column}>
+									{sortedTasks
+										.slice(Math.ceil(sortedTasks.length / 2))
+										.map((task) => (
+											<TaskInWidget
+												key={task._id}
+												task={task}
+												onTaskUpdate={handleUpdate}
+											/>
+										))}
+								</div>
+							</div>
+						)}
 					</div>
 				) : (
 					<></>
